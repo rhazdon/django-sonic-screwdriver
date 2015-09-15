@@ -70,3 +70,5 @@ gen
 # Mac DS_Store Directories
 .DS_Store
 sonic_screwdriver
+
+test.py

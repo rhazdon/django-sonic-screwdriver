@@ -1,44 +1,30 @@
 from optparse import make_option
 from django.core.management.base import BaseCommand
 from django_sonic_screwdriver.git import Git
-from django_sonic_screwdriver.version_handler import VersionHandler
+from django_sonic_screwdriver.settings import api_settings
 
 
 class Command(BaseCommand):
 
-	help = 'Creates Authentification Tokens'
+	help = 'Tag your project.'
 
 	option_list = BaseCommand.option_list + (
-		make_option('--major', '-M', action='store_true', dest='major', default=False,
-					help='Increase major number'),
-		make_option('--minor', '-m', action='store_true', dest='minor', default=False,
-					help='Increase minor number'),
-		make_option('--patch', '-p', action='store_true', dest='patch', default=False,
-					help='Increase patch number'),
 		make_option('--staging', action='store_true', dest='staging', default=False,
-					help=''),
+					help='Create a staging tag (e.g. staging-v1.2.3'),
 		make_option('--activate', action='store_true', dest='activate', default=False,
-					help=''),
+					help='Create a activate tag (e.g. activate-v1.2.3'),
 		make_option('--push', action='store_true', dest='push', default=False,
-					help='Push tags.'),
+					help='Push tags'),
 	)
 
 	def handle(self, *args, **options):
-		pass
-		# if options['major']:
-		# 	VersionHandler.increase_major()
-		#
-		# if options['minor']:
-		# 	VersionHandler.increase_minor()
-		#
-		# if options['patch']:
-		# 	VersionHandler.increase_patch()
-		#
-		# if options['staging']:
-		# 	pass
-		#
-		# if options['activate']:
-		# 	pass
-		#
-		# if options['push']:
-		# 	Git.git_push()
+		Git.tag_create()
+
+		if options['staging']:
+			Git.tag_create(api_settings.GIT_STAGING_TAG)
+
+		if options['activate']:
+			Git.tag_create(api_settings.GIT_ACTIVATE_TAG)
+
+		if options['push'] | api_settings.GIT_AUTO_TAG_PUSH:
+			Git.tag_push()

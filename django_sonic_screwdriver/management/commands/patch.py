@@ -1,7 +1,9 @@
 from optparse import make_option
 from django.core.management.base import BaseCommand
-from django_sonic_screwdriver.shell import Shell
-from django_sonic_screwdriver.version_handler import VersionHandler, version_handler
+
+from django_sonic_screwdriver.settings import api_settings
+from django_sonic_screwdriver.version_handler import VersionHandler
+from django_sonic_screwdriver.git import Git
 
 
 class Command(BaseCommand):
@@ -28,16 +30,23 @@ class Command(BaseCommand):
 	def handle(self, *args, **options):
 
 		"""
-		It is not allowed to use more then one option
+		Check, how much options are true.
+		If option '--force', '-f' is set this part will be skipped.
 		"""
 		if not options['force']:
 			counter = 0
 			for key in options:
 				if options[key]:
 					counter += 1
+
+			# If no options are set, do a normal patch
+			if counter == 1:
+				options['patch'] = True
+
+			# more then one options are not enabled per default
 			if counter >= 3:
 				exit('It is not recommended to use more then one parameter. Use -f to force your command.')
-		"""  """
+		###########################################################################################
 
 		if options['major']:
 			VersionHandler.set_major()
@@ -46,13 +55,25 @@ class Command(BaseCommand):
 			VersionHandler.set_minor()
 
 		if options['patch']:
-			VersionHandler.set_patch(version_handler.PATCH_TYPE_NORMAL)
+			VersionHandler.set_patch(VersionHandler.PATCH_NORMAL)
 
 		if options['alpha']:
-			VersionHandler.set_patch(version_handler.PATCH_TYPE_ALPHA)
+			VersionHandler.set_patch(VersionHandler.PATCH_ALPHA)
 
 		if options['beta']:
-			VersionHandler.set_patch(version_handler.PATCH_TYPE_BETA)
+			VersionHandler.set_patch(VersionHandler.PATCH_BETA)
 
 		if options['rc']:
-			VersionHandler.set_patch(version_handler.PATCH_TYPE_RC)
+			VersionHandler.set_patch(VersionHandler.PATCH_RC)
+
+		if api_settings.GIT_AUTO_BRANCH:
+			Git.branch_create()
+			if api_settings.GIT_AUTO_COMMIT:
+				Git.branch_commit()
+				if api_settings.GIT_AUTO_COMMIT_PUSH:
+					Git.branch_push()
+
+		if api_settings.GIT_AUTO_TAG:
+			Git.tag_create()
+			if api_settings.GIT_AUTO_TAG_PUSH:
+				Git.tag_push()

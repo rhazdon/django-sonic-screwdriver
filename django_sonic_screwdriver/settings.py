@@ -8,7 +8,13 @@ DEFAULTS = {
 	'VERSION_FILE': 'setup.py',
 
 	# Git
-	'GIT_TAG_AUTO_PUSH': False,
+	'GIT_AUTO_BRANCH': False,
+	'GIT_AUTO_COMMIT': False,
+	'GIT_AUTO_COMMIT_PUSH': False,
+	'GIT_AUTO_TAG': False,
+	'GIT_AUTO_TAG_PUSH': False,
+	'GIT_STAGING_TAG': 'staging',
+	'GIT_ACTIVATE_TAG': 'activate',
 }
 
 
@@ -37,6 +43,5 @@ class APISettings(object):
 		# Cache the result
 		setattr(self, attr, val)
 		return val
-
 
 api_settings = APISettings(USER_SETTINGS, DEFAULTS)
