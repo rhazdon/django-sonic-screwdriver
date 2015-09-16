@@ -7,6 +7,7 @@ from django_sonic_screwdriver.shell import Shell
 
 PATCH_OPTIONS = {
 	'PATCH_NORMAL': 'n',
+	'PATCH_DEV': 'dev',
 	'PATCH_ALPHA': 'a',
 	'PATCH_BETA': 'b',
 	'PATCH_RC': 'rc'

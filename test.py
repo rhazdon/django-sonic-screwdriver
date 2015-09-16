@@ -6,7 +6,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='django-sonic-screwdriver',
-    version='21.1.16',
+    version='21.1.19dev1',
     packages=find_packages(),
     license='MIT License',
     description='Django Sonic Screwdriver.',

@@ -17,6 +17,8 @@ class Command(BaseCommand):
 					help='Set minor number'),
 		make_option('--patch', '-p', action='store_true', dest='patch', default=False,
 					help='Ste patch number'),
+		make_option('--dev', '-d', action='store_true', dest='dev', default=False,
+					help='Set dev release (e.g. 1.2.1dev1)'),
 		make_option('--alpha', '-a', action='store_true', dest='alpha', default=False,
 					help='Set alpha release (e.g. 1.2.1a1)'),
 		make_option('--beta', '-b', action='store_true', dest='beta', default=False,
@@ -56,6 +58,9 @@ class Command(BaseCommand):
 
 		if options['patch']:
 			VersionHandler.set_patch(VersionHandler.PATCH_NORMAL)
+
+		if options['dev']:
+			VersionHandler.set_patch(VersionHandler.PATCH_DEV)
 
 		if options['alpha']:
 			VersionHandler.set_patch(VersionHandler.PATCH_ALPHA)

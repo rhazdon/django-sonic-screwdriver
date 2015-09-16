@@ -52,6 +52,11 @@ class Git(object):
 		# call(['git', 'show', 'v'+version])
 
 	@classmethod
+	def tag_delete(cls):
+		if cls.is_enabled():
+			pass
+
+	@classmethod
 	def tag_push(cls):
 		pass
 		# call(['git', 'push', 'origin', '--tags'])
