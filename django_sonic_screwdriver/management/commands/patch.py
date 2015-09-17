@@ -16,7 +16,7 @@ class Command(BaseCommand):
 		make_option('--minor', '-m', action='store_true', dest='minor', default=False,
 					help='Set minor number'),
 		make_option('--patch', '-p', action='store_true', dest='patch', default=False,
-					help='Ste patch number'),
+					help='Set patch number'),
 		make_option('--dev', '-d', action='store_true', dest='dev', default=False,
 					help='Set dev release (e.g. 1.2.1dev1)'),
 		make_option('--alpha', '-a', action='store_true', dest='alpha', default=False,
