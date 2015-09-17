@@ -9,19 +9,14 @@ DEFAULTS = {
 
 	'PATCH_AUTO_TAG': False,
 	'PATCH_AUTO_TAG_PUSH': False,
+	'PATCH_AUTO_COMMIT': False,
 
-	# Git
+	# Git Tagging
 	'GIT_TAG_AUTO_COMMIT': False,
-	'GIT_TAG_AUTO_PUSH': False,
+	'GIT_TAG_AUTO_TAG_PUSH': False,
 
-	'GIT_AUTO_BRANCH': False,
-	'GIT_AUTO_COMMIT': False,
-	'GIT_AUTO_COMMIT_PUSH': False,
-	'GIT_AUTO_TAG': False,
-	'GIT_AUTO_TAG_COMMIT': False,
-	'GIT_AUTO_TAG_PUSH': False,
-	'GIT_STAGING_TAG': 'staging',
-	'GIT_ACTIVATE_TAG': 'activate',
+	'GIT_STAGING_PRE_TAG': 'staging',
+	'GIT_ACTIVATE_PRE_TAG': 'activate',
 }
 
 

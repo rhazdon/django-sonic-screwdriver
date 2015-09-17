@@ -36,24 +36,25 @@ class Command(BaseCommand):
 		if counter == 1:
 			options['default'] = True
 		###########################################################################################
+
 		tag_succeed = 1
 
 		if APISettings.GIT_TAG_AUTO_COMMIT:
-			Git.git_add()
-			Git.branch_commit()
+			Git.add()
+			Git.commit()
 
 		if options['default']:
-			tag_succeed = Git.tag_create()
+			tag_succeed = Git.tag()
 
 		if options['staging']:
-			tag_succeed = Git.tag_create(APISettings.GIT_STAGING_TAG)
+			tag_succeed = Git.tag(APISettings.GIT_STAGING_PRE_TAG)
 
 		if options['activate']:
-			tag_succeed = Git.tag_create(APISettings.GIT_ACTIVATE_TAG)
+			tag_succeed = Git.tag(APISettings.GIT_ACTIVATE_PRE_TAG)
 
 		if options['delete']:
 			Git.tag_delete()
 
-		if options['push'] | APISettings.GIT_AUTO_TAG_PUSH:
+		if options['push'] | APISettings.GIT_TAG_AUTO_TAG_PUSH:
 			if tag_succeed:
-				Git.tag_push()
+				Git.push_tags()

@@ -72,7 +72,15 @@ class Command(BaseCommand):
 		if options['rc']:
 			Version.set_patch(Version.PATCH_RC)
 
+		"""
+		Automatics.
+		Depends on User Settings.
+		"""
+		if APISettings.PATCH_AUTO_COMMIT:
+			Git.add()
+			Git.commit()
+
 		if APISettings.PATCH_AUTO_TAG:
-			Git.tag_create()
+			Git.tag()
 			if APISettings.PATCH_AUTO_TAG_PUSH:
-				Git.tag_push()
+				Git.push_tags()
