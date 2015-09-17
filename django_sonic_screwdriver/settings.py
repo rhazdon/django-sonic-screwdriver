@@ -7,11 +7,18 @@ DEFAULTS = {
 	# Returns file where the version number is located
 	'VERSION_FILE': 'setup.py',
 
+	'PATCH_AUTO_TAG': False,
+	'PATCH_AUTO_TAG_PUSH': False,
+
 	# Git
+	'GIT_TAG_AUTO_COMMIT': False,
+	'GIT_TAG_AUTO_PUSH': False,
+
 	'GIT_AUTO_BRANCH': False,
 	'GIT_AUTO_COMMIT': False,
 	'GIT_AUTO_COMMIT_PUSH': False,
 	'GIT_AUTO_TAG': False,
+	'GIT_AUTO_TAG_COMMIT': False,
 	'GIT_AUTO_TAG_PUSH': False,
 	'GIT_STAGING_TAG': 'staging',
 	'GIT_ACTIVATE_TAG': 'activate',
@@ -44,4 +51,4 @@ class APISettings(object):
 		setattr(self, attr, val)
 		return val
 
-api_settings = APISettings(USER_SETTINGS, DEFAULTS)
+APISettings = APISettings(USER_SETTINGS, DEFAULTS)

@@ -2,8 +2,8 @@ import os
 import re
 import fileinput
 
-from django_sonic_screwdriver.settings import api_settings
-from django_sonic_screwdriver.shell import Shell
+from django_sonic_screwdriver.settings import APISettings
+from django_sonic_screwdriver.utils import Shell
 
 PATCH_OPTIONS = {
 	'PATCH_NORMAL': 'n',
@@ -14,66 +14,58 @@ PATCH_OPTIONS = {
 }
 
 
-class VersionHandler(object):
+class Version(object):
 
-	@classmethod
-	def get_version(cls):
+	@staticmethod
+	def get_version():
 		"""
 		Return version from setup.py
 		"""
-		version_desc = open(os.path.join(os.path.abspath(api_settings.VERSION_FILE)))
+		version_desc = open(os.path.join(os.path.abspath(APISettings.VERSION_FILE)))
 		version_file = version_desc.read()
 
 		try:
 			version = re.search(r"version=['\"]([^'\"]+)['\"]", version_file).group(1)
 			return version
 		except FileNotFoundError:
-			print(Shell.WARNING, 'File not found!', Shell.ENDC)
+			Shell.fail('File not found!')
 			return False
 		except ValueError:
-			print(Shell.WARNING, 'Version not found in file ' + version_file + '!', Shell.ENDC)
-			return False
-		except:
-			print(Shell.WARNING, 'Unexpected Error!', Shell.ENDC)
+			Shell.fail('Version not found in file ' + version_file + '!')
 			return False
 		finally:
 			version_desc.close()
 
-	@classmethod
-	def set_version(cls, old_version, new_version):
+	@staticmethod
+	def set_version(old_version, new_version):
 		"""
 		Write new version into VERSION_FILE
 		"""
 		try:
-			for line in fileinput.input(os.path.abspath(api_settings.VERSION_FILE), inplace=True):
+			for line in fileinput.input(os.path.abspath(APISettings.VERSION_FILE), inplace=True):
 				print(line.replace(old_version, new_version), end='')
-			print(Shell.OKGREEN, '* ' + old_version + ' --> ' + new_version, Shell.ENDC)
+			Shell.success('* ' + old_version + ' --> ' + new_version)
 		except FileNotFoundError:
-			print(Shell.WARNING, 'File not found!', Shell.ENDC)
-		except:
-			print(Shell.WARNING, 'Unexpected Error!', Shell.ENDC)
+			Shell.warn('File not found!')
 
-	@classmethod
-	def set_major(cls):
+	def set_major(self):
 		"""
 		Increment the major number of project
 		"""
-		old_version = cls.get_version()
+		old_version = self.get_version()
 		new_version = str(int(old_version.split('.', 5)[0])+1) + '.0.0'
-		cls.set_version(old_version, new_version)
+		self.set_version(old_version, new_version)
 
-	@classmethod
-	def set_minor(cls):
+	def set_minor(self):
 		"""
 		Increment the minor number of project
 		"""
-		old_version = cls.get_version()
+		old_version = self.get_version()
 		new_version = str(int(old_version.split('.', 5)[0])) + '.' + \
 			str(int(old_version.split('.', 5)[1])+1) + '.0'
-		cls.set_version(old_version, new_version)
+		self.set_version(old_version, new_version)
 
-	@classmethod
-	def set_patch(cls, patch_option):
+	def set_patch(self, patch_option):
 		"""
 		Increment the patch number of project
 
@@ -84,12 +76,13 @@ class VersionHandler(object):
 		PATCH_TYPE_ALPHA sets an 'a' at the end or increases the number behind the 'a'.
 		"""
 
-		old_version = cls.get_version()
+		old_version = self.get_version()
 		patch = ''
 
 		try:
 			patch = old_version.split('.', 5)[2]
 		except IndexError:
+			# TODO: Raise Error!
 			exit(Shell.FAIL + 'Take note your version looks like this: 0.1.2!' + Shell.ENDC)
 
 		""" If the patch_type is not normal, try to catch the patch_suffix """
@@ -128,7 +121,7 @@ class VersionHandler(object):
 		new_version = str(int(old_version.split('.', 5)[0])) + '.' + \
 			str(int(old_version.split('.', 5)[1])) + '.' + \
 			str(patch)
-		cls.set_version(old_version, new_version)
+		self.set_version(old_version, new_version)
 
 	def __init__(self, patch_options=None):
 		self.patch_options = patch_options or PATCH_OPTIONS
@@ -140,4 +133,4 @@ class VersionHandler(object):
 		val = self.patch_options[attr]
 		return val
 
-VersionHandler = VersionHandler(PATCH_OPTIONS)
+Version = Version(PATCH_OPTIONS)

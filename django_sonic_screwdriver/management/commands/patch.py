@@ -1,8 +1,8 @@
 from optparse import make_option
 from django.core.management.base import BaseCommand
 
-from django_sonic_screwdriver.settings import api_settings
-from django_sonic_screwdriver.version_handler import VersionHandler
+from django_sonic_screwdriver.settings import APISettings
+from django_sonic_screwdriver.version import Version
 from django_sonic_screwdriver.git import Git
 
 
@@ -47,38 +47,32 @@ class Command(BaseCommand):
 
 			# more then one options are not enabled per default
 			if counter >= 3:
+				# TODO: Raise Error!
 				exit('It is not recommended to use more then one parameter. Use -f to force your command.')
 		###########################################################################################
 
 		if options['major']:
-			VersionHandler.set_major()
+			Version.set_major()
 
 		if options['minor']:
-			VersionHandler.set_minor()
+			Version.set_minor()
 
 		if options['patch']:
-			VersionHandler.set_patch(VersionHandler.PATCH_NORMAL)
+			Version.set_patch(Version.PATCH_NORMAL)
 
 		if options['dev']:
-			VersionHandler.set_patch(VersionHandler.PATCH_DEV)
+			Version.set_patch(Version.PATCH_DEV)
 
 		if options['alpha']:
-			VersionHandler.set_patch(VersionHandler.PATCH_ALPHA)
+			Version.set_patch(Version.PATCH_ALPHA)
 
 		if options['beta']:
-			VersionHandler.set_patch(VersionHandler.PATCH_BETA)
+			Version.set_patch(Version.PATCH_BETA)
 
 		if options['rc']:
-			VersionHandler.set_patch(VersionHandler.PATCH_RC)
+			Version.set_patch(Version.PATCH_RC)
 
-		if api_settings.GIT_AUTO_BRANCH:
-			Git.branch_create()
-			if api_settings.GIT_AUTO_COMMIT:
-				Git.branch_commit()
-				if api_settings.GIT_AUTO_COMMIT_PUSH:
-					Git.branch_push()
-
-		if api_settings.GIT_AUTO_TAG:
+		if APISettings.PATCH_AUTO_TAG:
 			Git.tag_create()
-			if api_settings.GIT_AUTO_TAG_PUSH:
+			if APISettings.PATCH_AUTO_TAG_PUSH:
 				Git.tag_push()
