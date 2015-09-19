@@ -1,0 +1,12 @@
+[run]
+branch = true
+source =
+	django_sonic_screwdriver
+
+[report]
+exclude_lines =
+    pragma: no cover
+    Command(BaseCommand)
+
+[html]
+directory = htmlcov

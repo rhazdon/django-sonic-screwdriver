@@ -1,0 +1,10 @@
+languages:
+  Python: true
+
+exclude_paths:
+  - "htmlcov/*"
+  - "django_sonic_screwdriver/migrations/*"
+  - "app/authentication/migrations/*"
+  - ".idea/*"
+  - ".coverage"
+  - ".gitignore"

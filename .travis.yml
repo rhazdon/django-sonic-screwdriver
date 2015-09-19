@@ -1,0 +1,14 @@
+language: python
+python:
+  - "3.4"
+
+install:
+  - pip3 install -r requirements.txt
+  - pip3 install coveralls
+
+script:
+  - coverage run manage.py
+  - coverage report
+
+after_success:
+  - coveralls
