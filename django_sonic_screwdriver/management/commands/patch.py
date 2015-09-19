@@ -58,19 +58,19 @@ class Command(BaseCommand):
 			Version.set_minor()
 
 		if options['patch']:
-			Version.set_patch(Version.PATCH_NORMAL)
+			Version.set_patch()
 
 		if options['dev']:
-			Version.set_patch(Version.PATCH_DEV)
+			Version.set_patch(Version.DEV)
 
 		if options['alpha']:
-			Version.set_patch(Version.PATCH_ALPHA)
+			Version.set_patch(Version.ALPHA)
 
 		if options['beta']:
-			Version.set_patch(Version.PATCH_BETA)
+			Version.set_patch(Version.BETA)
 
 		if options['rc']:
-			Version.set_patch(Version.PATCH_RC)
+			Version.set_patch(Version.RC)
 
 		"""
 		Automatics.

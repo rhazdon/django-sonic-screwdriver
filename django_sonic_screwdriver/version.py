@@ -5,12 +5,14 @@ import fileinput
 from django_sonic_screwdriver.settings import APISettings
 from django_sonic_screwdriver.utils import Shell
 
-PATCH_OPTIONS = {
-	'PATCH_NORMAL': 'n',
-	'PATCH_DEV': 'dev',
-	'PATCH_ALPHA': 'a',
-	'PATCH_BETA': 'b',
-	'PATCH_RC': 'rc'
+RELEASE_TAGS = {
+	# pre-release
+	'ALPHA': 'a',
+	'BETA': 'b',
+	'RC': 'rc',
+	# dev-release
+	'DEV': 'dev',
+	# post-release
 }
 
 
@@ -29,10 +31,10 @@ class Version(object):
 			return version
 		except FileNotFoundError:
 			Shell.fail('File not found!')
-			return False
+			raise FileNotFoundError
 		except ValueError:
 			Shell.fail('Version not found in file ' + version_file + '!')
-			return False
+			raise ValueError
 		finally:
 			version_desc.close()
 
@@ -47,6 +49,26 @@ class Version(object):
 			Shell.success('* ' + old_version + ' --> ' + new_version)
 		except FileNotFoundError:
 			Shell.warn('File not found!')
+
+	@staticmethod
+	def get_patch_version(version):
+		try:
+			patch = version.split('.', 5)[2]
+		except IndexError:
+			Shell.fail('Take note your version looks like this: 0.1.2!')
+			raise IndexError
+		return patch
+
+	# @staticmethod
+	# def get_currently_used_pre_release_separator(patch):
+	# 	separator = ''
+	# 	if APISettings.PATCH_PRE_RELEASE_SEPARATOR != '':
+	# 		separator = str(patch.split(APISettings.PATCH_PRE_RELEASE_SEPARATOR, 2))
+	#
+	# 	if separator.__len__() > 1:
+	# 		return print(separator)
+	# 	else:
+	# 		return print('1')
 
 	def set_major(self):
 		"""
@@ -65,56 +87,47 @@ class Version(object):
 			str(int(old_version.split('.', 5)[1])+1) + '.0'
 		self.set_version(old_version, new_version)
 
-	def set_patch(self, patch_option):
+	def set_patch(self, release_tag=''):
 		"""
 		Increment the patch number of project
 
-		:var patch_suffix describes the number behind the 'a', 'b' or 'rc'
-		:var patch_type describes, which type of patch should be used.
+		:var release_tag describes the tag ('a', 'b', 'rc', ...)
+		:var release_tag_version describes the number behind the 'a', 'b' or 'rc'
 		For e.g.:
-		PATCH_TYPE_NORMAL increases the patch number normally.
-		PATCH_TYPE_ALPHA sets an 'a' at the end or increases the number behind the 'a'.
 		"""
 
 		old_version = self.get_version()
-		patch = ''
+		patch = self.get_patch_version(old_version)
 
-		try:
-			patch = old_version.split('.', 5)[2]
-		except IndexError:
-			# TODO: Raise Error!
-			exit(Shell.FAIL + 'Take note your version looks like this: 0.1.2!' + Shell.ENDC)
-
-		""" If the patch_type is not normal, try to catch the patch_suffix """
-		if patch_option != 'n':
+		# If the release_tag is not '', try to catch the tag
+		if release_tag != '':
 			try:
-				# patch already contains a tag. Just increase the patch_suffix
-				patch_suffix = int(patch.split(patch_option, 2)[1])+1
-				patch = str(patch.split(patch_option, 2)[0]) + str(patch_option) + str(patch_suffix)
+				# patch already contains a release_tag. Just increase the release_tag_version
+				release_tag_version = int(patch.split(release_tag, 2)[1])+1
+				patch = str(patch.split(release_tag, 2)[0]) + str(release_tag) + str(release_tag_version)
 			except IndexError:
 				try:
-					# patch doesn't contains any tag, so we have to add it and increase the whole patch
-					patch = str(int(patch)+1) + patch_option + str(1)
+					# patch doesn't contains any tag, so we have to add one and increase the whole patch
+					patch = str(int(patch)+1) + release_tag + str(1)
 				except ValueError:
 					# change tag in patch (e.g. 1.2.3a1 --> 1.2.3b1)
-					for key in PATCH_OPTIONS:
-						if PATCH_OPTIONS[key] in patch:
+					for key in RELEASE_TAGS:
+						if RELEASE_TAGS[key] in patch:
 							try:
-								patch = str(patch.split(PATCH_OPTIONS[key], 2)[0])
+								patch = str(patch.split(RELEASE_TAGS[key], 2)[0])
 							except ValueError:
 								pass
-					patch = str(patch) + patch_option + str(1)
+					patch = str(patch) + release_tag + str(1)
 
 		# Standard patch (e.g. 0.1.2 --> 0.1.3)
 		else:
 			try:
 				patch = int(patch)+1
 			except ValueError:
-				# Standard patch (e.g. 0.1.2a2 --> 0.1.2)
-				for key in PATCH_OPTIONS:
-					if PATCH_OPTIONS[key] in patch:
+				for key in RELEASE_TAGS:
+					if RELEASE_TAGS[key] in patch:
 						try:
-							patch = patch.split(PATCH_OPTIONS[key], 2)[0]
+							patch = patch.split(RELEASE_TAGS[key], 2)[0]
 						except ValueError:
 							pass
 
@@ -123,14 +136,14 @@ class Version(object):
 			str(patch)
 		self.set_version(old_version, new_version)
 
-	def __init__(self, patch_options=None):
-		self.patch_options = patch_options or PATCH_OPTIONS
+	def __init__(self, release_tags=None):
+		self.release_tags = release_tags or RELEASE_TAGS
 
 	def __getattr__(self, attr):
-		if attr not in self.patch_options.keys():
+		if attr not in self.release_tags.keys():
 			raise AttributeError("Invalid VersionHandler Key: '%s'" % attr)
 
-		val = self.patch_options[attr]
+		val = self.release_tags[attr]
 		return val
 
-Version = Version(PATCH_OPTIONS)
+Version = Version(RELEASE_TAGS)
