@@ -1,19 +1,19 @@
-before_script:
-  - git config --global url."https://".insteadOf git://
-
-test:
-  script:
-    - git submodule update --init
-    - if [ -d /opt/python_envs/sonic_ENV ]; then rm -rf /opt/python_envs/sonic_ENV; fi
-    - virtualenv -p python3.4 /opt/python_envs/sonic_ENV
-    - source /opt/python_envs/sonic_ENV/bin/activate
-    - export SECRET_KEY='123'
-    - pip3 install -r requirements.txt
-    - coverage run manage.py test
-    - coverage report
-    - deactivate
-    - rm -rf /opt/python_envs/sonic_ENV/
-  only:
-    - master
-  tags:
-    - shell
+#before_script:
+#  - git config --global url."https://".insteadOf git://
+#
+#test:
+#  script:
+#    - git submodule update --init
+#    - if [ -d /opt/python_envs/sonic_ENV ]; then rm -rf /opt/python_envs/sonic_ENV; fi
+#    - virtualenv -p python3.4 /opt/python_envs/sonic_ENV
+#    - source /opt/python_envs/sonic_ENV/bin/activate
+#    - export SECRET_KEY='123'
+#    - pip3 install -r requirements.txt
+#    - coverage run manage.py test
+#    - coverage report
+#    - deactivate
+#    - rm -rf /opt/python_envs/sonic_ENV/
+#  only:
+#    - master
+#  tags:
+#    - shell

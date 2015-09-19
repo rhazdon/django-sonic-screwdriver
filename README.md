@@ -1,5 +1,6 @@
 # Django Sonic Screwdriver
 ---------------------------------------
+[![build status](https://gitlabci.ifeelaffinity.com/projects/8/status.png?ref=master)](https://gitlabci.ifeelaffinity.com/projects/8?ref=master)
 [![Code Climate](https://codeclimate.com/github/rhazdon/django-sonic-screwdriver/badges/gpa.svg)](https://codeclimate.com/github/rhazdon/django-sonic-screwdriver)
 
 ## !!! Still in Development !!!
