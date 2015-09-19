@@ -1,5 +1,7 @@
 # Django Sonic Screwdriver
 ---------------------------------------
+[![Code Climate](https://codeclimate.com/github/rhazdon/django-sonic-screwdriver/badges/gpa.svg)](https://codeclimate.com/github/rhazdon/django-sonic-screwdriver)
+
 ## !!! Still in Development !!!
 
 Django Sonic Screwdriver is a collection of very useful commands and will make your life easier.
