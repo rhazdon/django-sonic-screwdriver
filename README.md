@@ -3,6 +3,7 @@
 [![build status](https://gitlabci.ifeelaffinity.com/projects/8/status.png?ref=master)](https://gitlabci.ifeelaffinity.com/projects/8?ref=master)
 [![Coverage Status](https://coveralls.io/repos/rhazdon/django-sonic-screwdriver/badge.svg?branch=master&service=github)](https://coveralls.io/github/rhazdon/django-sonic-screwdriver?branch=master)
 [![Code Climate](https://codeclimate.com/github/rhazdon/django-sonic-screwdriver/badges/gpa.svg)](https://codeclimate.com/github/rhazdon/django-sonic-screwdriver)
+[![PyPI version](https://badge.fury.io/py/django-sonic-screwdriver.svg)](http://badge.fury.io/py/django-sonic-screwdriver)
 
 ## !!! Still in Development !!!
 
