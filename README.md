@@ -28,6 +28,8 @@ Add the package to your settings.py:
 		# Returns file where the version number is located
 		'VERSION_FILE': 'setup.py',
 	
+		'PRE_RELEASE_SEPARATOR': '',  # '_', '-', '.'
+	
 		'PATCH_AUTO_TAG': False,
 		'PATCH_AUTO_TAG_PUSH': False,
 		'PATCH_AUTO_COMMIT': False,

@@ -1,13 +1,13 @@
 from django.conf import settings
 
-
 USER_SETTINGS = getattr(settings, 'SONIC_SCREWDRIVER', None)
 
 DEFAULTS = {
 	# Returns file where the version number is located
 	'VERSION_FILE': 'setup.py',
 
-	'PATCH_PRE_RELEASE_SEPARATOR': '',
+	'PRE_RELEASE_SEPARATOR': '',
+
 	'PATCH_AUTO_TAG': False,
 	'PATCH_AUTO_TAG_PUSH': False,
 	'PATCH_AUTO_COMMIT': False,

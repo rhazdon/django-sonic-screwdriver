@@ -1,7 +1,7 @@
 from subprocess import call, check_output
 
 from django_sonic_screwdriver.settings import APISettings
-from django_sonic_screwdriver.version import Version
+from django_sonic_screwdriver.version.version import Version
 from django_sonic_screwdriver.utils import Shell
 from django_sonic_screwdriver.git.decorators import git_available
 

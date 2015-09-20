@@ -2,18 +2,9 @@ import os
 import re
 import fileinput
 
-from django_sonic_screwdriver.settings import APISettings
 from django_sonic_screwdriver.utils import Shell
-
-RELEASE_TAGS = {
-	# pre-release
-	'ALPHA': 'a',
-	'BETA': 'b',
-	'RC': 'rc',
-	# dev-release
-	'DEV': 'dev',
-	# post-release
-}
+from django_sonic_screwdriver.version.tags import RELEASE_TAGS, PRE_RELEASE_SEPARATORS
+from django_sonic_screwdriver.settings import APISettings
 
 
 class Version(object):
@@ -53,22 +44,25 @@ class Version(object):
 	@staticmethod
 	def get_patch_version(version):
 		try:
-			patch = version.split('.', 5)[2]
+			patch = version.split('.', 2)[2]
 		except IndexError:
 			Shell.fail('Take note your version looks like this: 0.1.2!')
 			raise IndexError
 		return patch
 
-	# @staticmethod
-	# def get_currently_used_pre_release_separator(patch):
-	# 	separator = ''
-	# 	if APISettings.PATCH_PRE_RELEASE_SEPARATOR != '':
-	# 		separator = str(patch.split(APISettings.PATCH_PRE_RELEASE_SEPARATOR, 2))
-	#
-	# 	if separator.__len__() > 1:
-	# 		return print(separator)
-	# 	else:
-	# 		return print('1')
+	@staticmethod
+	def get_current_pre_release_separator(patch):
+		for key in PRE_RELEASE_SEPARATORS:
+			if PRE_RELEASE_SEPARATORS[key] in patch:
+				return PRE_RELEASE_SEPARATORS[key]
+		return False
+
+	@staticmethod
+	def get_current_pre_release_tag(patch):
+		for key in RELEASE_TAGS:
+			if RELEASE_TAGS[key] in patch:
+				return RELEASE_TAGS[key]
+		return False
 
 	def set_major(self):
 		"""
@@ -87,7 +81,7 @@ class Version(object):
 			str(int(old_version.split('.', 5)[1])+1) + '.0'
 		self.set_version(old_version, new_version)
 
-	def set_patch(self, release_tag=''):
+	def set_patch(self, pre_release_tag=''):
 		"""
 		Increment the patch number of project
 
@@ -96,45 +90,44 @@ class Version(object):
 		For e.g.:
 		"""
 
-		old_version = self.get_version()
-		patch = self.get_patch_version(old_version)
+		current_version = self.get_version()
+		current_patch = self.get_patch_version(current_version)
+		current_pre_release_tag = self.get_current_pre_release_tag(current_patch)
+		current_pre_release_separator = self.get_current_pre_release_separator(current_patch)
+		new_patch = ''
 
-		# If the release_tag is not '', try to catch the tag
-		if release_tag != '':
-			try:
-				# patch already contains a release_tag. Just increase the release_tag_version
-				release_tag_version = int(patch.split(release_tag, 2)[1])+1
-				patch = str(patch.split(release_tag, 2)[0]) + str(release_tag) + str(release_tag_version)
-			except IndexError:
-				try:
-					# patch doesn't contains any tag, so we have to add one and increase the whole patch
-					patch = str(int(patch)+1) + release_tag + str(1)
-				except ValueError:
-					# change tag in patch (e.g. 1.2.3a1 --> 1.2.3b1)
-					for key in RELEASE_TAGS:
-						if RELEASE_TAGS[key] in patch:
-							try:
-								patch = str(patch.split(RELEASE_TAGS[key], 2)[0])
-							except ValueError:
-								pass
-					patch = str(patch) + release_tag + str(1)
+		# The new patch should get a release tag
+		if pre_release_tag:
 
-		# Standard patch (e.g. 0.1.2 --> 0.1.3)
+			# Check, if the current patch already contains a pre_release_tag.
+			if current_pre_release_tag:
+				new_patch = str(current_patch.split(current_pre_release_tag, 2)[0]) + pre_release_tag
+
+				if pre_release_tag == current_pre_release_tag:
+					new_patch += str(int(current_patch.split(current_pre_release_tag, 2)[1])+1)
+				else:
+					new_patch += '0'
+
+			# The current patch does not contains a pre_release_tag.
+			else:
+				new_patch = str(int(current_patch)+1) + \
+							APISettings.PRE_RELEASE_SEPARATOR + \
+							pre_release_tag + \
+							'0'
+
+		# The new patch should not contain any tag. So just increase it.
 		else:
-			try:
-				patch = int(patch)+1
-			except ValueError:
-				for key in RELEASE_TAGS:
-					if RELEASE_TAGS[key] in patch:
-						try:
-							patch = patch.split(RELEASE_TAGS[key], 2)[0]
-						except ValueError:
-							pass
+			if current_pre_release_separator:
+				new_patch = str(int(current_patch.split(current_pre_release_separator, 2)[0])+1)
+			elif current_pre_release_tag:
+				new_patch = str(int(current_patch.split(current_pre_release_tag, 2)[0])+1)
+			else:
+				new_patch = str(int(current_patch)+1)
 
-		new_version = str(int(old_version.split('.', 5)[0])) + '.' + \
-			str(int(old_version.split('.', 5)[1])) + '.' + \
-			str(patch)
-		self.set_version(old_version, new_version)
+		new_version = str(int(current_version.split('.', 5)[0])) + '.' + \
+			str(int(current_version.split('.', 5)[1])) + '.' + \
+			str(new_patch)
+		self.set_version(current_version, new_version)
 
 	def __init__(self, release_tags=None):
 		self.release_tags = release_tags or RELEASE_TAGS

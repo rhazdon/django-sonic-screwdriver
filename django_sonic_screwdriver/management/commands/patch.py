@@ -2,7 +2,7 @@ from optparse import make_option
 from django.core.management.base import BaseCommand
 
 from django_sonic_screwdriver.settings import APISettings
-from django_sonic_screwdriver.version import Version
+from django_sonic_screwdriver.version.version import Version
 from django_sonic_screwdriver.git import Git
 
 
