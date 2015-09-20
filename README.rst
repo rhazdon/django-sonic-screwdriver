@@ -1,5 +1,6 @@
 # Django Sonic Screwdriver
----------------------------------------
+--------------------------
+
 [![build status](https://gitlabci.ifeelaffinity.com/projects/8/status.png?ref=master)](https://gitlabci.ifeelaffinity.com/projects/8?ref=master)
 [![Coverage Status](https://coveralls.io/repos/rhazdon/django-sonic-screwdriver/badge.svg?branch=master&service=github)](https://coveralls.io/github/rhazdon/django-sonic-screwdriver?branch=master)
 [![Code Climate](https://codeclimate.com/github/rhazdon/django-sonic-screwdriver/badges/gpa.svg)](https://codeclimate.com/github/rhazdon/django-sonic-screwdriver)
@@ -53,14 +54,25 @@ Add the package to your settings.py:
 		-a, --alpha           Set alpha release (e.g. 1.2.1a1)
 		-b, --beta            Set beta release (e.g. 1.2.1b1)
 		-r, --release-candidate
-							  Set release candidate release (e.g. 1.2.1rc1).
+							Set release candidate release (e.g. 1.2.1rc1).
 		-f, --force           
 
 
 	$ ./manage.py git:tag
 		--default             (is default)
-  		--staging             Create a staging tag (e.g. staging-v1.2.3)
-  		--activate            Create a activate tag (e.g. activate-v1.2.3)
-  		-d, --delete-last     Delete last tag
- 		--push                Push tags
+		--staging             Create a staging tag (e.g. staging-v1.2.3)
+		--activate            Create a activate tag (e.g. activate-v1.2.3)
+		-d, --delete-last     Delete last tag
+		--push                Push tags
+
+
+	$ ./manage.py pypi:export	# Export project with wheel
+		-w, --wheel           Export project with wheel (recommended). Needs package wheel.
+		-u, --upload          Upload Project.
+
+	
+	$ ./manage.py pypi:upload	# Upload project to PyPI via twine
+		
+		
+		
 
