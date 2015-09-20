@@ -1,5 +1,6 @@
 # Django Sonic Screwdriver
 --------------------------
+<a href='https://gitlabci.ifeelaffinity.com/projects/8?ref=master'><img src='https://gitlabci.ifeelaffinity.com/projects/8/status.png?ref=master' /></a>
 
 [![build status](https://gitlabci.ifeelaffinity.com/projects/8/status.png?ref=master)](https://gitlabci.ifeelaffinity.com/projects/8?ref=master)
 [![Coverage Status](https://coveralls.io/repos/rhazdon/django-sonic-screwdriver/badge.svg?branch=master&service=github)](https://coveralls.io/github/rhazdon/django-sonic-screwdriver?branch=master)
