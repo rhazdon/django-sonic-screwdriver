@@ -51,6 +51,17 @@ class Git(object):
 		return False
 
 	@staticmethod
+	def __git_branch(git_tag):
+		"""
+		Creates a new branch.
+		The function call will return 0 if the command success.
+		"""
+		Shell.msg('Create new branch with tag ' + git_tag)
+		if not call(['git', 'checkout', '-b', '\'' + git_tag + '\'']):
+			return True
+		return False
+
+	@staticmethod
 	def __git_commit(git_tag):
 		"""
 		Commit files to branch.
@@ -112,6 +123,15 @@ class Git(object):
 		:return:
 		"""
 		if self.__git_add():
+			return True
+		return False
+
+	def branch(self):
+		"""
+		Function is public.
+		:return:
+		"""
+		if self.__git_commit(Version.get_version()):
 			return True
 		return False
 

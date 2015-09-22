@@ -6,5 +6,7 @@ class Command(BaseCommand):
 
 	help = 'Upload project to pypi via twine.'
 
+	requires_system_checks = False
+
 	def handle(self, *args, **options):
 		call(['twine', 'upload', 'dist/*'])
