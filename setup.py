@@ -9,11 +9,11 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='django-sonic-screwdriver',
-    version='0.2.0',
+    version='0.2.1',
     packages=find_packages(),
     include_package_data=True,
     license='MIT License',
-    description='Django Sonic Screwdriver.',
+    description='Django Sonic Screwdriver is a collection of very useful commands and will make your life easier.',
     long_description=README,
     url='https://github.com/rhazdon/django-sonic-screwdriver',
     author='Djordje Ilic',

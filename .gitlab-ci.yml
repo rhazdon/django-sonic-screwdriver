@@ -16,4 +16,4 @@ test:
   only:
     - master
   tags:
-    - shell
+    - python3.5

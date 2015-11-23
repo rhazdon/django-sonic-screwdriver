@@ -15,26 +15,24 @@ GIT_OPTIONS = {
 
 class Git(object):
 
-    """
-    Basic Functions
-    """
     @staticmethod
     def create_git_version_tag(deploy_tag):
         if deploy_tag != '':
             deploy_tag += '-'
         return str(deploy_tag + 'v' + Version.get_version())
 
-    @property
+    @staticmethod
     @git_available
-    def get_current_branch(self):
+    def get_current_branch():
         current_branch = str(check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD']))
         return current_branch[2:][:(current_branch.__len__()-5)]
 
-    # @property
-    # @git_available
-    # def get_latest_tag(self):
-    #     latest_tag = call(['git', 'describe', '--tags'])
-    #     return latest_tag
+    @staticmethod
+    @git_available
+    def get_latest_tag():
+        latest_tag_hash = str(check_output(['git', 'rev-list', '--tags', '--max-count=1']))
+        latest_tag = str(check_output(['git', 'describe', '--tags', latest_tag_hash[2:][:(latest_tag_hash.__len__()-5)]]))
+        return latest_tag[2:][:(latest_tag.__len__()-5)]
 
     """
     Basic Git Commands
@@ -141,21 +139,21 @@ class Git(object):
             return True
         return False
 
-    # @staticmethod
-    # @git_available
-    # def __git_tag_delete(git_tag):
-    #     """
-    #     Delete last tag.
-    #     The function call will return 0 if the command success.
-    #     """
-    #     Shell.msg('Delete tag.')
-    #     if APISettings.DEBUG:
-    #         Shell.debug('Execute "git tag -d" would delete tag with name ' + git_tag + '.')
-    #         return True
-    #
-    #     if not call(['git', 'tag', '-d', '\'' + git_tag + '\'']):
-    #         return True
-    #     return False
+    @staticmethod
+    @git_available
+    def __git_tag_delete(git_tag):
+        """
+        Delete last tag.
+        The function call will return 0 if the command success.
+        """
+        Shell.msg('Delete tag.')
+        if APISettings.DEBUG:
+            Shell.debug('Execute "git tag -d" would delete tag with name ' + git_tag + '.')
+            return True
+
+        if not call(['git', 'tag', '-d', '\'' + git_tag + '\'']):
+            return True
+        return False
 
     @staticmethod
     @git_available
@@ -236,12 +234,17 @@ class Git(object):
             return True
         return False
 
-    def tag_delete(self):
+    def tag_delete(self, tag):
         """
         Function is public.
         Push tags.
         :return:
         """
+        if tag:
+            if self.__git_tag_delete(tag):
+                return True
+            return False
+
         if self.__git_tag_delete(self.get_latest_tag()):
             return True
         return False

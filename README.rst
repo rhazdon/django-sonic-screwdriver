@@ -32,7 +32,7 @@ Add the package to your settings.py:
     ...
     'django_sonic_screwdriver',
     ...
-)
+  )
 
 
 Settings
@@ -41,31 +41,41 @@ Settings
 .. code:: python
 
   SONIC_SCREWDRIVER = {
-  # For test purpose
-  'DEBUG': False,
+    # For test purpose
+    'DEBUG': False,
 
-  # Returns file where the version number is located
-  'VERSION_FILE': 'setup.py',
+    # Returns file where the version number is located
+    'VERSION_FILE': 'setup.py',
 
-  'PRE_RELEASE_SEPARATOR': '',  # '_', '-', '.'
+    'PRE_RELEASE_SEPARATOR': '',  # '_', '-', '.'
 
-  'PATCH_AUTO_TAG': False,
-  'PATCH_AUTO_TAG_PUSH': False,
-  'PATCH_AUTO_COMMIT': False,
+    'PATCH_AUTO_TAG': False,
+    'PATCH_AUTO_TAG_PUSH': False,
+    'PATCH_AUTO_COMMIT': False,
 
-  'GIT_DIR': setting.BASE_DIR,
+    'GIT_DIR': setting.BASE_DIR,
 
-  # Git Tagging
-  'GIT_TAG_AUTO_COMMIT': False,
-  'GIT_TAG_AUTO_TAG_PUSH': False,
+    # Git Tagging
+    'GIT_TAG_AUTO_COMMIT': False,
+    'GIT_TAG_AUTO_TAG_PUSH': False,
 
-  'GIT_STAGING_PRE_TAG': 'staging',
-  'GIT_ACTIVATE_PRE_TAG': 'activate',
-}
+    'GIT_STAGING_PRE_TAG': 'staging',
+    'GIT_ACTIVATE_PRE_TAG': 'activate',
+  }
 
 
 Commands
 --------
+
+$ ./manage.py cache:clear
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+  --default                 Clear cache
+
+
+$ ./manage.py gen:secretkey
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+  --default                 Generate a new Secretkey for Django
+
 
 $ ./manage.py patch
 ~~~~~~~~~~~~~~~~~~~
@@ -94,7 +104,7 @@ $ ./manage.py git:tag:push
 
 $ ./manage.py git:tag:delete
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  --default                 Delete latest tag
+  <tag>                     Remove the latest or given tag (optional).
 
 
 $ ./manage.py pypi:export

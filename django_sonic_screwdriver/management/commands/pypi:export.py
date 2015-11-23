@@ -12,8 +12,8 @@ class Command(BaseCommand):
     help = 'Export your project.'
 
     option_list = BaseCommand.option_list + (
-        make_option('--wheel', '-w', action='store_true', dest='wheel', default=False,
-                    help='Export project with wheel (recommended). Needs package wheel.'),
+        make_option('--no-wheel', action='store_true', dest='nowheel', default=False,
+                    help='Do not export project with wheel.'),
         make_option('--upload', '-u', action='store_true', dest='upload', default=False,
                     help='Upload Project.'),
     )
@@ -23,10 +23,10 @@ class Command(BaseCommand):
 
         export = ['python', 'setup.py', 'sdist']
 
-        if options['wheel']:
-            export.append('bdist_wheel')
+        if options['nowheel']:
             call(export)
         else:
+            export.append('bdist_wheel')
             call(export)
 
         if options['upload']:

@@ -1,5 +1,13 @@
 # Changelog
 
+
+### 0.2.1 (23.11.2015):
+- Fix README.md
+- pypi:export exports per default with wheel.
+- Fix .gitlab-ci
+- add function git:tag:delete
+
+
 ### 0.2.0 (23.11.2015):
 - Replace tabs through spaces
 - Add Changelog
