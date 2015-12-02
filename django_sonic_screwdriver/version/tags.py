@@ -8,7 +8,7 @@ RELEASE_TAGS = {
     # post-release
 }
 
-PRE_RELEASE_SEPARATORS = {
+RELEASE_SEPARATORS = {
     'DOT': '.',
     'MINUS': '-',
     'UNDERSCORE': '_',

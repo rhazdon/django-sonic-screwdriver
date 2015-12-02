@@ -3,7 +3,7 @@ import re
 import fileinput
 
 from django_sonic_screwdriver.utils import Shell
-from django_sonic_screwdriver.version.tags import RELEASE_TAGS, PRE_RELEASE_SEPARATORS
+from django_sonic_screwdriver.version.tags import RELEASE_TAGS, RELEASE_SEPARATORS
 from django_sonic_screwdriver.settings import APISettings
 
 
@@ -55,10 +55,10 @@ class Version(object):
         return patch
 
     @staticmethod
-    def get_current_pre_release_separator(patch):
-        for key in PRE_RELEASE_SEPARATORS:
-            if PRE_RELEASE_SEPARATORS[key] in patch:
-                return PRE_RELEASE_SEPARATORS[key]
+    def get_current_RELEASE_SEPARATOR(patch):
+        for key in RELEASE_SEPARATORS:
+            if RELEASE_SEPARATORS[key] in patch:
+                return RELEASE_SEPARATORS[key]
         return False
 
     @staticmethod
@@ -97,7 +97,7 @@ class Version(object):
         current_version = self.get_version()
         current_patch = self.get_patch_version(current_version)
         current_pre_release_tag = self.get_current_pre_release_tag(current_patch)
-        current_pre_release_separator = self.get_current_pre_release_separator(current_patch)
+        current_RELEASE_SEPARATOR = self.get_current_RELEASE_SEPARATOR(current_patch)
         new_patch = ''
 
         # The new patch should get a release tag
@@ -115,14 +115,14 @@ class Version(object):
             # The current patch does not contains a pre_release_tag.
             else:
                 new_patch = str(int(current_patch)+1) + \
-                            APISettings.PRE_RELEASE_SEPARATOR + \
+                            APISettings.RELEASE_SEPARATOR + \
                             pre_release_tag + \
                             '0'
 
         # The new patch should not contain any tag. So just increase it.
         else:
-            if current_pre_release_separator:
-                new_patch = str(int(current_patch.split(current_pre_release_separator, 2)[0])+1)
+            if current_RELEASE_SEPARATOR:
+                new_patch = str(int(current_patch.split(current_RELEASE_SEPARATOR, 2)[0])+1)
             elif current_pre_release_tag:
                 new_patch = str(int(current_patch.split(current_pre_release_tag, 2)[0])+1)
             else:

@@ -7,7 +7,7 @@ DEFAULTS = {
     # Returns file where the version number is located
     'VERSION_FILE': 'setup.py',
 
-    'PRE_RELEASE_SEPARATOR': '',
+    'RELEASE_SEPARATOR': '',
 
     'PATCH_AUTO_TAG': False,
     'PATCH_AUTO_TAG_PUSH': False,
@@ -22,6 +22,8 @@ DEFAULTS = {
 
     'GIT_STAGING_PRE_TAG': 'staging',
     'GIT_ACTIVATE_PRE_TAG': 'activate',
+
+    'SECURE_TAGGING': True,
 }
 
 
