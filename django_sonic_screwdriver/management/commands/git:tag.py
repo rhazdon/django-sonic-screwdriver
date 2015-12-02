@@ -13,8 +13,8 @@ class Command(BaseCommand):
                     help='(is default)'),
         make_option('--staging', action='store_true', dest='staging', default=False,
                     help='Create a staging tag (e.g. staging-v1.2.3)'),
-        make_option('--activate', action='store_true', dest='activate', default=False,
-                    help='Create a activate tag (e.g. activate-v1.2.3)'),
+        make_option('--production', action='store_true', dest='production', default=False,
+                    help='Create a production tag (e.g. activate-v1.2.3)'),
         make_option('--push', action='store_true', dest='push', default=False,
                     help='Push tags'),
     )
@@ -47,7 +47,7 @@ class Command(BaseCommand):
         if options['staging']:
             tag_succeed = Git.tag(APISettings.GIT_STAGING_PRE_TAG)
 
-        if options['activate']:
+        if options['production']:
             tag_succeed = Git.tag(APISettings.GIT_ACTIVATE_PRE_TAG)
 
         if options['push'] | APISettings.GIT_TAG_AUTO_TAG_PUSH:

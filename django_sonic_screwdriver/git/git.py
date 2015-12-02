@@ -39,19 +39,24 @@ class Git(object):
     """
     @staticmethod
     @git_available
-    def __git_add():
+    def __git_add(args=''):
         """
         Add files to staging.
         The function call will return 0 if the command success.
         """
+        command = ['git', 'add', '.']
+
         Shell.msg('Adding files...')
         if APISettings.DEBUG:
             Shell.debug('Execute "git add" in dry mode.')
-            if not call(['git', 'add', '.', '--dry-run']):
+            command.append('--dry-run')
+            if not call(command):
                 pass
             return True
 
-        if not call(['git', 'add', '.']):
+        for key in args:
+            command.append(key)
+        if not call(command):
             pass
         return False
 
@@ -175,12 +180,12 @@ class Git(object):
     """
     Public Functions
     """
-    def add(self):
+    def add(self, args=''):
         """
         Function is public.
         :return:
         """
-        if self.__git_add():
+        if self.__git_add(args):
             return True
         return False
 

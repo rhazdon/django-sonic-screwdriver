@@ -8,16 +8,8 @@ from django_sonic_screwdriver.utils.shell import Shell
 class Command(BaseCommand):
 
     args = 'tag'
-    help = 'Remove last tag.'
+    help = 'Remove last or given tag.'
 
-    # option_list = BaseCommand.option_list + (
-    #     make_option('tag', nargs='+', dest='tag', default=False, type=str,
-    #                 help='Specify a tag, if you want. Otherwise the last tag will be removed.'),
-    # )
-
-    # def add_arguments(self, parser):
-    #     parser.add_argument('tag', nargs='+', type=str, default='0',
-    #                          help='Specify a tag, if you want. Otherwise the last tag will be removed.')
 
     def handle(self, *args, **options):
         if args:

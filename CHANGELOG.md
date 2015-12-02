@@ -1,9 +1,12 @@
 # Changelog
 
+### 0.2.2 (02.12.2015):
+- add command git:add
+
 
 ### 0.2.1 (23.11.2015):
 - Fix README.md
-- pypi:export exports per default with wheel.
+- pypi:export exports per default with wheel
 - Fix .gitlab-ci
 - add function git:tag:delete
 
