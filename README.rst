@@ -14,7 +14,7 @@ Django Sonic Screwdriver
 
 Django Sonic Screwdriver is a collection of very useful commands and will make your life easier.
 
-The versioning tool fully supports `PEP 0440<https://www.python.org/dev/peps/pep-0440/>`_.
+The versioning tool fully supports PEP 0440 <https://www.python.org/dev/peps/pep-0440/>.
 
 
 Installation
@@ -69,7 +69,6 @@ Settings
 
 **Description:**
 
-
 +-----------------------+-------------------+---------------------------------------------------------------------+
 | Setting               | Default           | Description                                                         |
 +=======================+===================+=====================================================================+
@@ -81,7 +80,7 @@ Settings
 | RELEASE_SEPARATOR     | ''                | The RELEASE_SEPARATOR is the seperator between the version number   |
 |                       |                   | and the relase. E.g. v0.1.2b0, v0.1.2_b0,   v0.1.2-b0, v0.1.2.b0.   |
 |                       |                   | All of this variants is support by                                  |
-|                       |                   | `PEP 0440<https://www.python.org/dev/peps/pep-0440/>`_.             |
+|                       |                   | PEP 0440<https://www.python.org/dev/peps/pep-0440/>.                |
 +-----------------------+-------------------+---------------------------------------------------------------------+
 | PATCH_AUTO_TAG        | False             | If True, Sonic Screwdriver tries to create automatically a tag from |
 |                       |                   | every patch you create with ./manage.py patch.                      |
@@ -126,55 +125,82 @@ patch
 ~~~~~
 Command "patch" will help you to increase the version number of your project in a easy way.
 
-======                  ===========
-Option                  Description
-======                  ===========
--M, --major             Set major number
--m, --minor             Set minor number
--p, --patch             Set patch number
--d, --dev               Set dev release (e.g. 1.2.1dev1)
--a, --alpha             Set alpha release (e.g. 1.2.1a1)
--b, --beta              Set beta release (e.g. 1.2.1b1)
--r, --release-candidate Set release candidate release (e.g. 1.2.1rc1)
--f, --force             Force patching
-======                  ===========
++---------------------------+-----------------------------------------------+
+| Option                    | Description                                   |
++===========================+===============================================+
+| -M, --major               | Set major number                              |
++---------------------------+-----------------------------------------------+
+| -m, --minor               | Set minor number                              |
++---------------------------+-----------------------------------------------+
+| -p, --patch               | Set patch number                              |
++---------------------------+-----------------------------------------------+
+| -d, --dev                 | Set dev release (e.g. 1.2.1dev1)              |
++---------------------------+-----------------------------------------------+
+| -a, --alpha               | Set alpha release (e.g. 1.2.1a1)              |
++---------------------------+-----------------------------------------------+
+| -b, --beta                | Set beta release (e.g. 1.2.1b1)               |
++---------------------------+-----------------------------------------------+
+| -r, --release-candidate   | Set release candidate release (e.g. 1.2.1rc1) |
++---------------------------+-----------------------------------------------+
+| -f, --force               | Force patching                                |
++---------------------------+-----------------------------------------------+
 
 
 git:add
 ~~~~~~~
 Add files to Git repository. Supports all standard "git add" options.
 
-======                  ===========
-Option                  Description
-======                  ===========
--n, --dry-run           Dry run
---verbose               Be verbose.
--i, --interactive       Interactive picking.
--p, --patch             Select hunks interactively.
--e, --edit              Edit current diff and apply.
--f, --force             Allow adding otherwise ignored files.
--u, --update            Update tracked files.
--N, --intent-to-add     Record only the fact that the path will be added later.
--A, --all               Add changes from all tracked and untracked files.
---ignore-removal        Ignore paths removed in the working tree (same as --no-all).
---refresh               Do not add, only refresh the index.
---ignore-errors         Just skip files which cannot be added because of errors.
---ignore-missing        Check if - even missing - files are ignored in dry run.
-======                  ===========
++---------------------------+-----------------------------------------------+
+| Option                    | Description                                   |
++===========================+===============================================+
+| -n, --dry-run             | Dry run                                       |
++---------------------------+-----------------------------------------------+
+| --verbose                 | Be verbose.                                   |
++---------------------------+-----------------------------------------------+
+| -i, --interactive         | Interactive picking.                          |
++---------------------------+-----------------------------------------------+
+| -p, --patch               | Select hunks interactively.                   |
++---------------------------+-----------------------------------------------+
+| -e, --edit                | Edit current diff and apply.                  |
++---------------------------+-----------------------------------------------+
+| -f, --force               | Allow adding otherwise ignored files.         |
++---------------------------+-----------------------------------------------+
+| -u, --update              | Update tracked files.                         |
++---------------------------+-----------------------------------------------+
+| -N, --intent-to-add       | Record only the fact that the path will be    |
+|                           | added later.                                  |
++---------------------------+-----------------------------------------------+
+| -A, --all                 | Add changes from all tracked and untracked    |
+|                           | files.                                        |
++---------------------------+-----------------------------------------------+
+| --ignore-removal          | Ignore paths removed in the working tree      |
+|                           | (same as --no-all).                           |
++---------------------------+-----------------------------------------------+
+| --refresh                 | Do not add, only refresh the index.           |
++---------------------------+-----------------------------------------------+
+| --ignore-errors           | Just skip files which cannot be added because |
+|                           | of errors.                                    |
++---------------------------+-----------------------------------------------+
+| --ignore-missing          | Check if - even missing - files are ignored   |
+|                           | in dry run.                                   |
++---------------------------+-----------------------------------------------+
 
 
 git:tag
 ~~~~~~~
 Tag your project.
 
-======                  ===========
-Option                  Description
-======                  ===========
---default               (is default)
---staging               Create a staging tag (e.g. staging-v1.2.3)
---activate              Create a activate tag (e.g. activate-v1.2.3)
---push                  Push tags
-======                  ===========
++---------------------------+-----------------------------------------------+
+| Option                    | Description                                   |
++===========================+===============================================+
+| --default                 | (is default)                                  |
++---------------------------+-----------------------------------------------+
+| --staging                 | Create a staging tag (e.g. staging-v1.2.3).   |
++---------------------------+-----------------------------------------------+
+| --activate                | Create a activate tag (e.g. activate-v1.2.3). |
++---------------------------+-----------------------------------------------+
+| --push                    | Push tags.                                    |
++---------------------------+-----------------------------------------------+
 
 
 git:tag:push
@@ -186,34 +212,36 @@ git:tag:delete
 ~~~~~~~~~~~~~~
 Remove the latest or given tag from local repository.
 
-======                  ===========
-Option                  Description
-======                  ===========
-<tag>                   Remove the latest or given tag (optional).
-======                  ===========
++---------------------------+-----------------------------------------------+
+| Option                    | Description                                   |
++===========================+===============================================+
+| <tag>                     | Remove the latest or given tag (optional).    |
++---------------------------+-----------------------------------------------+
 
 
 pypi:export
 ~~~~~~~~~~~
 Export your project.
 
-======                  ===========
-Option                  Description
-======                  ===========
---no-wheel              Export project without wheel (not recommended)
--u, --upload            Upload Project
-======                  ===========
++---------------------------+-----------------------------------------------+
+| Option                    | Description                                   |
++===========================+===============================================+
+| --no-wheel                | Export project without wheel.                 |
+|                           | (not recommended)                             |
++---------------------------+-----------------------------------------------+
+| -u, --upload              | Upload Project.                               |
++---------------------------+-----------------------------------------------+
 
 
 pypi:upload
 ~~~~~~~~~~~
-Upload project to pypi via twine.'
+Upload project to pypi via twine.
 
-======                  ===========
-Option                  Description
-======                  ===========
---default               Upload project to PyPI via twine
-======                  ===========
++---------------------------+-----------------------------------------------+
+| Option                    | Description                                   |
++===========================+===============================================+
+| --default                 | Upload project to PyPI via twine.             |
++---------------------------+-----------------------------------------------+
 
 
 To Do:
