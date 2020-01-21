@@ -11,6 +11,7 @@ sphinx-rtd-theme = "*"
 [packages]
 django = "*"
 djangorestframework = "*"
+twine = "*"
 
 [requires]
 python_version = "3.8"

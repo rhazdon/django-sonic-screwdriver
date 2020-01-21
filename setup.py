@@ -18,8 +18,8 @@ setup(
     url="https://github.com/rhazdon/django-sonic-screwdriver",
     author="Djordje Atlialp",
     author_email="djordje@atlialp.com",
-    install_requires=["django", "djangorestframework", "wheel"],
-    tests_require=["coverage", "django", "djangorestframework", "coveralls"],
+    install_requires=["django", "djangorestframework", "twine", "wheel"],
+    tests_require=["coverage", "coveralls", "django", "djangorestframework"],
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Environment :: Plugins",
