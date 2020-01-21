@@ -2,6 +2,9 @@
 branch = true
 source =
 	django_sonic_screwdriver
+omit =
+    manage.py
+    django_sonic_screwdriver/apps/**/manage.py
 
 [report]
 exclude_lines =
