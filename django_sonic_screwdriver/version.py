@@ -3,29 +3,39 @@ import re
 import fileinput
 
 from django_sonic_screwdriver.utils import shell
-from django_sonic_screwdriver.version.tags import RELEASE_TAGS, RELEASE_SEPARATORS
 from django_sonic_screwdriver.settings import APISettings
 
 
-class Version(object):
+RELEASE_TAGS = {
+    # pre-release
+    "ALPHA": "a",
+    "BETA": "b",
+    "RC": "rc",
+    # dev-release
+    "DEV": "dev",
+    # post-release
+}
+
+RELEASE_SEPARATORS = {"DOT": ".", "MINUS": "-", "UNDERSCORE": "_"}
+
+
+class Version:
     @staticmethod
     def get_version():
         """
         Return version from setup.py
         """
-        version_desc = open(os.path.join(os.path.abspath(APISettings.VERSION_FILE)))
-        version_file = version_desc.read()
+        with open(os.path.join(os.path.abspath(APISettings.VERSION_FILE))) as version_desc:
+            version_file = version_desc.read()
 
-        try:
-            return re.search(r"version=['\"]([^'\"]+)['\"]", version_file).group(1)
-        except FileNotFoundError:
-            shell.fail("File not found!")
-            raise FileNotFoundError
-        except ValueError:
-            shell.fail("Version not found in file " + version_file + "!")
-            raise ValueError
-        finally:
-            version_desc.close()
+            try:
+                return re.search(r"version=['\"]([^'\"]+)['\"]", version_file).group(1)
+            except FileNotFoundError:  # pragma: no cover
+                shell.fail("File not found!")
+                raise FileNotFoundError
+            except ValueError:  # pragma: no cover
+                shell.fail("Version not found in file " + version_file + "!")
+                raise ValueError
 
     @staticmethod
     def set_version(old_version, new_version):

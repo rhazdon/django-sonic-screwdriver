@@ -5,11 +5,11 @@ source =
 omit =
     manage.py
     django_sonic_screwdriver/apps/**/manage.py
+    setup.py
 
 [report]
 exclude_lines =
     pragma: no cover
-    Command(BaseCommand)
 
 [html]
 directory = htmlcov

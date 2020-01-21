@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 from django_sonic_screwdriver.settings import APISettings
-from django_sonic_screwdriver.version.version import version
+from django_sonic_screwdriver.version import version
 from django_sonic_screwdriver.git import git
 
 
