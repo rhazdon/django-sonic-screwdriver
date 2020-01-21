@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-21 12:00+0100\n"
+"POT-Creation-Date: 2020-01-21 17:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,13 +18,49 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: django_sonic_screwdriver/admin.py:53
+msgid "Created and Updated"
+msgstr "Erstellt und Aktualisiert"
+
+#: django_sonic_screwdriver/apps/admin_comments/models.py:14
+msgid "User"
+msgstr "Nutzer"
+
+#: django_sonic_screwdriver/apps/admin_comments/models.py:17
+msgid "The user is the creator of the comment."
+msgstr "Dieser Nutzer ist der Ersteller des Kommentares"
+
+#: django_sonic_screwdriver/apps/admin_comments/models.py:21
+msgid "Comment"
+msgstr "Kommentar"
+
+#: django_sonic_screwdriver/apps/admin_comments/models.py:24
+msgid "The comment itself."
+msgstr "Der eigentliche Kommentar."
+
+#: django_sonic_screwdriver/apps/admin_comments/models.py:29
+msgid "Object ID"
+msgstr "Object ID"
+
+#: django_sonic_screwdriver/apps/admin_comments/models.py:32
+msgid "ID of the related object."
+msgstr "ID des verknüpften Objektes."
+
+#: django_sonic_screwdriver/apps/admin_comments/models.py:42
+msgid "Content type"
+msgstr "Content type"
+
+#: django_sonic_screwdriver/apps/admin_comments/models.py:45
+msgid "Related content type."
+msgstr "Verknüpfter Content Type."
+
 #: django_sonic_screwdriver/exceptions.py:61
 msgid "Invalid request."
 msgstr ""
 
 #: django_sonic_screwdriver/exceptions.py:67
 msgid "Please sign in."
-msgstr ""
+msgstr "Bitte loggen Sie sich ein."
 
 #: django_sonic_screwdriver/exceptions.py:73
 msgid "Forbidden."
@@ -50,6 +86,8 @@ msgstr ""
 msgid ""
 "You do that a little too often. Please wait a little before you try again."
 msgstr ""
+"Sie haben diesen Vorgang zu oft versucht. "
+"Bitte warten Sie ein wenig, bevor Sie es erneut versuchen."
 
 #: django_sonic_screwdriver/exceptions.py:112
 msgid ""
