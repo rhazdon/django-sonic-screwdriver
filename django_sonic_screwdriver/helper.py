@@ -1,7 +1,5 @@
 import collections
-import random
 import re
-import string
 
 from django.core.files import File
 from django.http import QueryDict
@@ -11,20 +9,6 @@ from django.utils.functional import Promise
 from .iterables import get_iterable, is_iterable
 
 camelize_re = re.compile(r"[a-z0-9]?_[a-z0-9]")
-
-
-def generate_random_string(string_length: int = 6, upper_case: bool = False) -> str:
-    """
-    Generates a random string of letters and digits.
-    """
-    letter_and_digits = string.ascii_letters + string.digits
-    random_string = "".join(
-        random.choice(letter_and_digits) for i in range(string_length)
-    )
-
-    if upper_case:
-        return random_string.upper()
-    return random_string
 
 
 def camel_to_underscore(name):

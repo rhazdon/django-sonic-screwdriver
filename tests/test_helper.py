@@ -1,5 +1,3 @@
-from collections.abc import Iterable
-
 from django.http import QueryDict
 from django.test import TestCase
 from django_sonic_screwdriver.helper import underscoreize
