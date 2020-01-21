@@ -13,14 +13,14 @@ before_install:
   - export DJANGO_SETTINGS_MODULE=tests.settings
 
 install:
-  - pip install -q "Django${DJANGO}"
-  - pip install .
-  - pip install coverage
-  - pip install coveralls
+  - pip install pipenv
+  - pipenv install --dev
+  - pipenv install -q "Django${DJANGO}"
 
 script:
-  - coverage run --source=jet --omit=*/migrations/*,*/tests/* manage.py test jet
+  - make test
 
 after_success:
-  - coverage report
-  - coveralls
+  - pipenv run coverage html
+  - pipenv run coverage report -m
+  - pipenv coveralls
