@@ -1,29 +1,23 @@
 from django.conf import settings
 
-USER_SETTINGS = getattr(settings, 'SONIC_SCREWDRIVER', None)
+USER_SETTINGS = getattr(settings, "SONIC_SCREWDRIVER", None)
 
 DEFAULTS = {
-    'DEBUG': False,
+    "DEBUG": False,
     # Returns file where the version number is located
-    'VERSION_FILE': 'setup.py',
-
-    'RELEASE_SEPARATOR': '',
-
-    'PATCH_AUTO_TAG': False,
-    'PATCH_AUTO_TAG_PUSH': False,
-    'PATCH_AUTO_COMMIT': False,
-
+    "VERSION_FILE": "setup.py",
+    "RELEASE_SEPARATOR": "",
+    "PATCH_AUTO_TAG": False,
+    "PATCH_AUTO_TAG_PUSH": False,
+    "PATCH_AUTO_COMMIT": False,
     # Git
-    'GIT_DIR': settings.BASE_DIR,
-
+    "GIT_DIR": settings.BASE_DIR,
     # Git Tagging
-    'GIT_TAG_AUTO_COMMIT': False,
-    'GIT_TAG_AUTO_TAG_PUSH': False,
-
-    'GIT_STAGING_PRE_TAG': 'staging',
-    'GIT_ACTIVATE_PRE_TAG': 'activate',
-
-    'SECURE_TAGGING': True,
+    "GIT_TAG_AUTO_COMMIT": False,
+    "GIT_TAG_AUTO_TAG_PUSH": False,
+    "GIT_STAGING_PRE_TAG": "staging",
+    "GIT_ACTIVATE_PRE_TAG": "activate",
+    "SECURE_TAGGING": True,
 }
 
 
@@ -34,6 +28,7 @@ class APISettings(object):
     from django_sonic_screwdriver.settings import api_settings
     print(api_settings.ANY_VALUE)
     """
+
     def __init__(self, user_settings=None, defaults=None):
         self.user_settings = user_settings or {}
         self.defaults = defaults or DEFAULTS
@@ -52,5 +47,6 @@ class APISettings(object):
         # Cache the result
         setattr(self, attr, val)
         return val
+
 
 APISettings = APISettings(USER_SETTINGS, DEFAULTS)

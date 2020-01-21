@@ -1,1 +1,1 @@
-from django_sonic_screwdriver.utils.shell import Shell
+from .shell import shell

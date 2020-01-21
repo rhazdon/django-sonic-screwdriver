@@ -1,42 +1,40 @@
 import os
 from setuptools import setup, find_packages
 
-with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
+with open(os.path.join(os.path.dirname(__file__), "README.rst")) as readme:
     README = readme.read()
 
 # allow setup.py to be run from any path
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
-    name='django-sonic-screwdriver',
-    version='0.2.2',
+    name="django-sonic-screwdriver",
+    version="0.2.2",
     packages=find_packages(),
     include_package_data=True,
-    license='MIT License',
-    description='Django Sonic Screwdriver is a collection of very useful commands and will make your life easier.',
+    license="MIT License",
+    description="Django Sonic Screwdriver is a collection of very useful commands and will make your life easier.",
     long_description=README,
-    url='https://github.com/rhazdon/django-sonic-screwdriver',
-    author='Djordje Ilic',
-    author_email='djordje.ilic@posteo.de',
-    maintainer='',
-    maintainer_email='',
-    install_requires=['six>=1.10', 'wheel>=0.26.0'],
-    tests_require=['Django', 'coverage'],
+    url="https://github.com/rhazdon/django-sonic-screwdriver",
+    author="Djordje Atlialp",
+    author_email="djordje@atlialp.com",
+    install_requires=["wheel"],
+    tests_require=["Django", "coverage", "coveralls"],
     classifiers=[
-        'Development Status :: 3 - Alpha',
-        'Environment :: Plugins',
-        'Environment :: Web Environment',
-        'Framework :: Django',
-        'Framework :: Django :: 1.8',
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT License',
-        'Operating System :: OS Independent',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.2',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: Implementation :: PyPy',
-        'Topic :: Utilities',
+        "Development Status :: 3 - Alpha",
+        "Environment :: Plugins",
+        "Environment :: Web Environment",
+        "Framework :: Django",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: Implementation :: PyPy",
+        "Topic :: Utilities",
     ],
 )

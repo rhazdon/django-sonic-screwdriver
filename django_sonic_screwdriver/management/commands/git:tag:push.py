@@ -1,12 +1,11 @@
-from optparse import make_option
 from django.core.management.base import BaseCommand
-from django_sonic_screwdriver.git import Git
-from django_sonic_screwdriver.settings import APISettings
+
+from django_sonic_screwdriver.git import git
 
 
 class Command(BaseCommand):
 
-    help = 'Push your tagged project.'
+    help = "Push your tagged project."
 
     def handle(self, *args, **options):
-        Git.push_tags()
+        git.push_tags()

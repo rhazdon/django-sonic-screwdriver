@@ -1,15 +1,11 @@
 RELEASE_TAGS = {
     # pre-release
-    'ALPHA': 'a',
-    'BETA': 'b',
-    'RC': 'rc',
+    "ALPHA": "a",
+    "BETA": "b",
+    "RC": "rc",
     # dev-release
-    'DEV': 'dev',
+    "DEV": "dev",
     # post-release
 }
 
-RELEASE_SEPARATORS = {
-    'DOT': '.',
-    'MINUS': '-',
-    'UNDERSCORE': '_',
-}
+RELEASE_SEPARATORS = {"DOT": ".", "MINUS": "-", "UNDERSCORE": "_"}
