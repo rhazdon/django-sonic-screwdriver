@@ -1,0 +1,74 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-21 12:00+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: django_sonic_screwdriver/exceptions.py:61
+msgid "Invalid request."
+msgstr ""
+
+#: django_sonic_screwdriver/exceptions.py:67
+msgid "Please sign in."
+msgstr ""
+
+#: django_sonic_screwdriver/exceptions.py:73
+msgid "Forbidden."
+msgstr ""
+
+#: django_sonic_screwdriver/exceptions.py:79
+msgid "Not found."
+msgstr ""
+
+#: django_sonic_screwdriver/exceptions.py:85
+msgid "Conflict."
+msgstr ""
+
+#: django_sonic_screwdriver/exceptions.py:91
+msgid "Precondition failed."
+msgstr ""
+
+#: django_sonic_screwdriver/exceptions.py:97
+msgid "Unprocessable Entity."
+msgstr ""
+
+#: django_sonic_screwdriver/exceptions.py:104
+msgid ""
+"You do that a little too often. Please wait a little before you try again."
+msgstr ""
+
+#: django_sonic_screwdriver/exceptions.py:112
+msgid ""
+"Something's gone wrong. Our technicians are working flat out to solve the "
+"problem."
+msgstr ""
+
+#: django_sonic_screwdriver/models.py:22
+msgid "Created at"
+msgstr "Erstellt am"
+
+#: django_sonic_screwdriver/models.py:26
+msgid "Model was created at this time."
+msgstr "Die Zeit, an der das Model erstellt wurde."
+
+#: django_sonic_screwdriver/models.py:30
+msgid "Updated at"
+msgstr "Überarbeitet am"
+
+#: django_sonic_screwdriver/models.py:34
+msgid "Model was updated at this time."
+msgstr "Die Zeit, an der das Model das letzte mal überarbeitet wurde."
