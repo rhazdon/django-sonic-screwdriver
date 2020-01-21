@@ -73,3 +73,6 @@ sonic_screwdriver
 
 test.py
 .git-bak
+
+*.sqlite3
+

@@ -19,6 +19,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "django_sonic_screwdriver",
+    "django_sonic_screwdriver.apps.admin_comments"
 ]
 
 MIDDLEWARE = [
@@ -46,7 +48,12 @@ TEMPLATES = [
     }
 ]
 
-DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3"}}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 USE_I18N = True
 USE_L10N = True
