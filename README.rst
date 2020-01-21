@@ -1,8 +1,8 @@
 Django Sonic Screwdriver
 ========================
 
-.. image:: https://coveralls.io/repos/rhazdon/django-sonic-screwdriver/badge.svg?branch=master&service=github
-   :target: https://coveralls.io/github/rhazdon/django-sonic-screwdriver?branch=master
+.. image:: https://coveralls.io/repos/github/rhazdon/django-sonic-screwdriver/badge.svg
+   :target: https://coveralls.io/github/rhazdon/django-sonic-screwdriver
 
 .. image:: https://codeclimate.com/github/rhazdon/django-sonic-screwdriver/badges/gpa.svg
    :target: https://codeclimate.com/github/rhazdon/django-sonic-screwdriver
@@ -11,6 +11,8 @@ Django Sonic Screwdriver
 .. image:: https://badge.fury.io/py/django-sonic-screwdriver.svg
    :target: http://badge.fury.io/py/django-sonic-screwdriver
 
+.. image:: https://travis-ci.org/rhazdon/django-sonic-screwdriver.svg?branch=master
+   :target: https://travis-ci.org/rhazdon/django-sonic-screwdriver
 
 Django Sonic Screwdriver is a collection of very useful commands and will make your life easier.
 
