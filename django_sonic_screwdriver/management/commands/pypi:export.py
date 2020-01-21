@@ -2,7 +2,6 @@ import os
 import shutil
 
 from django.core.management.base import BaseCommand
-from optparse import make_option
 from subprocess import call
 
 from django_sonic_screwdriver.utils.shell import shell
@@ -12,23 +11,24 @@ class Command(BaseCommand):
 
     help = "Export your project."
 
-    option_list = BaseCommand.option_list + (
-        make_option(
+    def add_arguments(self, parser):
+
+        parser.add_argument(
             "--no-wheel",
             action="store_true",
             dest="nowheel",
             default=False,
             help="Do not export project with wheel.",
-        ),
-        make_option(
+        )
+
+        parser.add_argument(
             "--upload",
             "-u",
             action="store_true",
             dest="upload",
             default=False,
             help="Upload Project.",
-        ),
-    )
+        )
 
     def handle(self, *args, **options):
         clean_dist_dir()

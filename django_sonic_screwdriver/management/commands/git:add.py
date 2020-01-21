@@ -16,6 +16,7 @@ class Command(BaseCommand):
             default=False,
             help="Dry run.",
         )
+
         parser.add_argument(
             "--verbose",
             action="store_true",
@@ -23,6 +24,7 @@ class Command(BaseCommand):
             default=False,
             help="Be verbose.",
         )
+
         parser.add_argument(
             "--interactive",
             "-i",
@@ -31,6 +33,7 @@ class Command(BaseCommand):
             default=False,
             help="Interactive picking.",
         )
+
         parser.add_argument(
             "--patch",
             "-p",
@@ -39,6 +42,7 @@ class Command(BaseCommand):
             default=False,
             help="Select hunks interactively.",
         )
+
         parser.add_argument(
             "--edit",
             "-e",
@@ -47,6 +51,7 @@ class Command(BaseCommand):
             default=False,
             help="Edit current diff and apply.",
         )
+
         parser.add_argument(
             "--force",
             "-f",
@@ -55,6 +60,7 @@ class Command(BaseCommand):
             default=False,
             help="Allow adding otherwise ignored files.",
         )
+
         parser.add_argument(
             "--update",
             "-u",
@@ -63,6 +69,7 @@ class Command(BaseCommand):
             default=False,
             help="Update tracked files.",
         )
+
         parser.add_argument(
             "--intent-to-add",
             "-N",
@@ -71,6 +78,7 @@ class Command(BaseCommand):
             default=False,
             help="Record only the fact that the path will be added later.",
         )
+
         parser.add_argument(
             "--all",
             "-A",
@@ -86,6 +94,7 @@ class Command(BaseCommand):
             default=False,
             help="Ignore paths removed in the working tree (same as --no-all).",
         )
+
         parser.add_argument(
             "--refresh",
             action="store_true",
@@ -93,6 +102,7 @@ class Command(BaseCommand):
             default=False,
             help="Do not add, only refresh the index.",
         )
+
         parser.add_argument(
             "--ignore-errors",
             action="store_true",
@@ -100,6 +110,7 @@ class Command(BaseCommand):
             default=False,
             help="Just skip files which cannot be added because of errors.",
         )
+        
         parser.add_argument(
             "--ignore-missing",
             action="store_true",
