@@ -58,7 +58,16 @@ class BaseChoiceEnum(Enum):
         return status.name if status else default
 
 
-class ErrorCodes(Enum):
+class SerializableEnum(BaseChoiceEnum):
+    """
+    This is a Enum, that is serializable.
 
+    To serialize this, use `from django_sonic_screwdriver.json import stringify_keys`.
+    """
+    def json_repr(self):
+        return self.value
+
+
+class ErrorCodes(Enum):
     def __str__(self):
         return str(self.value)
