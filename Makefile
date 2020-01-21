@@ -1,4 +1,4 @@
-.PHONY: test
+.PHONY: test makemessages
 
 default: help
 
@@ -9,3 +9,6 @@ help:
 
 test:  ## Run all tests and report the coverage.
 	DJANGO_SETTINGS_MODULE=tests.settings pipenv run coverage run --source='.' manage.py test tests && pipenv run coverage html && pipenv run coverage report -m
+
+makemessages:  ## Creates .po files of the marked strings for translating.
+	pipenv run ./manage.py makemessages --locale=de

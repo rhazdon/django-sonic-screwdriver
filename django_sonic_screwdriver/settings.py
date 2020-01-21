@@ -1,5 +1,6 @@
 from django.conf import settings
 
+
 USER_SETTINGS = getattr(settings, "SONIC_SCREWDRIVER", None)
 
 DEFAULTS = {
@@ -24,9 +25,10 @@ DEFAULTS = {
 class APISettings(object):
     """
     A settings object, that allows API settings to be accessed as properties.
+
     For example:
-    from django_sonic_screwdriver.settings import api_settings
-    print(api_settings.ANY_VALUE)
+        #> from django_sonic_screwdriver.settings import api_settings
+        #> print(api_settings.ANY_VALUE)
     """
 
     def __init__(self, user_settings=None, defaults=None):
