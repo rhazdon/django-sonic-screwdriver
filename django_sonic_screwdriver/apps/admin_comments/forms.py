@@ -8,8 +8,12 @@ class CommentInlineForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CommentInlineForm, self).__init__(*args, **kwargs)
         instance = getattr(self, "instance", None)
-        self.fields["comment"].widget.attrs["rows"] = 2
+
+        self.fields["comment"].widget.attrs["rows"] = 3
+
         if instance and instance.pk:
+            line_height = len(instance.comment.split("\n"))
+            self.fields["comment"].widget.attrs["rows"] = line_height
             self.fields["comment"].widget.attrs["readonly"] = True
             self.fields["comment"].widget.attrs["border"] = 0
 
