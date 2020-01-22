@@ -45,5 +45,9 @@ class Comment(BaseModel):
         help_text=_("Related content type."),
     )
 
+    class Meta:
+        verbose_name = _("Comment")
+        verbose_name_plural = _("Comments")
+
     def __str__(self):
         return f"{self.content_type} - {self.object_id}"
