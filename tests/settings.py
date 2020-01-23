@@ -20,7 +20,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "django_sonic_screwdriver",
-    "django_sonic_screwdriver.apps.admin_comments"
+    "django_sonic_screwdriver.apps.admin_comments",
+    "django_sonic_screwdriver.apps.ban",
 ]
 
 MIDDLEWARE = [
@@ -29,6 +30,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django_sonic_screwdriver.apps.ban.middleware.BanMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
 ]
 
@@ -49,9 +51,9 @@ TEMPLATES = [
 ]
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
     }
 }
 
@@ -65,3 +67,7 @@ MEDIA_ROOT = ""
 MEDIA_URL = ""
 
 STATIC_URL = "/static/"
+
+
+DJANGO_SONIC_SCREWDRIVER_BAN_REMOTE_ADDR_HEADER = "REMOTE_ADDR"
+DJANGO_SONIC_SCREWDRIVER_BAN_DEFAULT_END_TIME = 60 * 60
