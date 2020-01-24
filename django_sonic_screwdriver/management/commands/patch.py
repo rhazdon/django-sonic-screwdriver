@@ -1,12 +1,15 @@
 from django.core.management.base import BaseCommand
-from django_sonic_screwdriver.settings import APISettings
+from django_sonic_screwdriver.settings import api_settings
 from django_sonic_screwdriver.version import version
 from django_sonic_screwdriver.git import git
 
 
 class Command(BaseCommand):
 
-    help = 'Command "patch" will help you to increase the version number of your project in a easy way.'
+    help = (
+        'Command "patch" will help you to increase the version number of '
+        "your project in a easy way."
+    )
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -77,7 +80,6 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-
         """
         Check, how much options are true.
         If option '--force', '-f' is set this part will be skipped.
@@ -96,9 +98,9 @@ class Command(BaseCommand):
             if counter >= 3:
                 # TODO: Raise Error!
                 exit(
-                    "It is not recommended to use more then one parameter. Use -f to force your command."
+                    "It is not recommended to use more then one parameter. "
+                    "Use -f to force your command."
                 )
-        ###########################################################################################
 
         if options["major"]:
             version.set_major()
@@ -121,15 +123,5 @@ class Command(BaseCommand):
         if options["rc"]:
             version.set_patch(version.RC)
 
-        """
-        Automatic commands.
-        Depends on User Settings.
-        """
-        if APISettings.PATCH_AUTO_COMMIT:
-            git.add()
-            git.commit()
-
-        if APISettings.PATCH_AUTO_TAG:
+        if api_settings.PATCH_AUTO_TAG:
             git.tag()
-            if APISettings.PATCH_AUTO_TAG_PUSH:
-                git.push_tags()

@@ -25,9 +25,6 @@ Settings
     'GIT_DIR': setting.BASE_DIR,
 
     # Git Tagging
-    'GIT_TAG_AUTO_COMMIT': False,
-    'GIT_TAG_AUTO_TAG_PUSH': False,
-
     'GIT_STAGING_PRE_TAG': 'staging',
     'GIT_ACTIVATE_PRE_TAG': 'activate',
 
@@ -56,11 +53,7 @@ Description
 | PATCH_AUTO_TAG_PUSH   | False             | If True, after creating a tag via './manage.py patch',              |
 |                       |                   | Sonic Screwdriver will try to push this tag automatically.          |
 +-----------------------+-------------------+---------------------------------------------------------------------+
-| PATCH_AUTO_COMMIT     | False             | NOT IMPLEMENTED YET!                                                |
-+-----------------------+-------------------+---------------------------------------------------------------------+
 | GIT_DIR               | settings.BASE_DIR | Specify your project root dir.                                      |
-+-----------------------+-------------------+---------------------------------------------------------------------+
-| GIT_TAG_AUTO_COMMIT   | False             | NOT IMPLEMENTED YET!                                                |
 +-----------------------+-------------------+---------------------------------------------------------------------+
 | GIT_TAG_AUTO_TAG_PUSH | False             | If True, Sonic Screwdriver pushes automatically the current         |
 |                       |                   | created tags.                                                       |

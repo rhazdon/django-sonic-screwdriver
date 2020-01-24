@@ -3,7 +3,7 @@ import re
 import fileinput
 
 from django_sonic_screwdriver.utils import shell
-from django_sonic_screwdriver.settings import APISettings
+from django_sonic_screwdriver.settings import api_settings
 
 
 RELEASE_TAGS = {
@@ -25,7 +25,9 @@ class Version:
         """
         Return version from setup.py
         """
-        with open(os.path.join(os.path.abspath(APISettings.VERSION_FILE))) as version_desc:
+        with open(
+            os.path.join(os.path.abspath(api_settings.VERSION_FILE))
+        ) as version_desc:
             version_file = version_desc.read()
 
             try:
@@ -43,12 +45,12 @@ class Version:
         Write new version into VERSION_FILE
         """
         try:
-            if APISettings.DEBUG:
+            if api_settings.DEBUG:
                 shell.debug("* " + old_version + " --> " + new_version)
                 return True
 
             for line in fileinput.input(
-                os.path.abspath(APISettings.VERSION_FILE), inplace=True
+                os.path.abspath(api_settings.VERSION_FILE), inplace=True
             ):
                 print(line.replace(old_version, new_version), end="")
             shell.success("* " + old_version + " --> " + new_version)
@@ -135,7 +137,7 @@ class Version:
             else:
                 new_patch = (
                     str(int(current_patch) + 1)
-                    + APISettings.RELEASE_SEPARATOR
+                    + api_settings.RELEASE_SEPARATOR
                     + pre_release_tag
                     + "0"
                 )

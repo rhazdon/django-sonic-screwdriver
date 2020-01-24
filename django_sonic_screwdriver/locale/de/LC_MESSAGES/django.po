@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-22 10:52+0000\n"
+"POT-Creation-Date: 2020-01-24 06:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,6 +23,8 @@ msgid "Created and Updated"
 msgstr "Erstellt und Aktualisiert"
 
 #: django_sonic_screwdriver/apps/admin_comments/models.py:14
+#: django_sonic_screwdriver/apps/ban/models.py:39
+#: django_sonic_screwdriver/apps/ban/models.py:70
 msgid "User"
 msgstr "Nutzer"
 
@@ -59,9 +61,57 @@ msgstr "Verknüpfter Content Type."
 msgid "Comments"
 msgstr "Kommentare"
 
+#: django_sonic_screwdriver/apps/ban/admin.py:12
+#: django_sonic_screwdriver/apps/ban/admin.py:18
+#: django_sonic_screwdriver/apps/ban/models.py:62
+msgid "Ban"
+msgstr "Sperre"
+
+#: django_sonic_screwdriver/apps/ban/models.py:49
+msgid "End date of the ban"
+msgstr "Sperre gültig bis"
+
+#: django_sonic_screwdriver/apps/ban/models.py:53
+msgid ""
+"The end date tells, until the ban is valid. If the end_date is empty, the "
+"ban is infinit."
+msgstr ""
+"Das End-Datum sagt aus, bis wann die Sperre gültig ist. "
+"Das Feld kann auch leer gelassen werden, um die Sperre fristlos zu setzen."
+
+#: django_sonic_screwdriver/apps/ban/models.py:63
+msgid "Bans"
+msgstr "Sperren"
+
+#: django_sonic_screwdriver/apps/ban/models.py:78
+msgid "User Ban"
+msgstr "Nutzer Sperre"
+
+#: django_sonic_screwdriver/apps/ban/models.py:79
+msgid "User Bans"
+msgstr "Nutzer Sperren"
+
+#: django_sonic_screwdriver/apps/ban/models.py:87
+msgid "IP"
+msgstr "IP"
+
+#: django_sonic_screwdriver/apps/ban/models.py:91
+msgid "This is the banned ip. Every request from this IP will result in 403."
+msgstr ""
+"Dies ist die IP, die gesperrt wird. Jede Anfrage, "
+"die von dieser IP kommt, wird mit 403 beantwortet."
+
+#: django_sonic_screwdriver/apps/ban/models.py:96
+msgid "IP Ban"
+msgstr "IP Sperre"
+
+#: django_sonic_screwdriver/apps/ban/models.py:97
+msgid "IP Bans"
+msgstr "IP Sperren"
+
 #: django_sonic_screwdriver/exceptions.py:61
 msgid "Invalid request."
-msgstr ""
+msgstr "Ungültige Anfrage."
 
 #: django_sonic_screwdriver/exceptions.py:67
 msgid "Please sign in."
@@ -69,23 +119,23 @@ msgstr "Bitte loggen Sie sich ein."
 
 #: django_sonic_screwdriver/exceptions.py:73
 msgid "Forbidden."
-msgstr ""
+msgstr "Verboten."
 
 #: django_sonic_screwdriver/exceptions.py:79
 msgid "Not found."
-msgstr ""
+msgstr "Nicht gefunden."
 
 #: django_sonic_screwdriver/exceptions.py:85
 msgid "Conflict."
-msgstr ""
+msgstr "Konflikt."
 
 #: django_sonic_screwdriver/exceptions.py:91
 msgid "Precondition failed."
-msgstr ""
+msgstr "Vorbedingungen nicht erfüllt."
 
 #: django_sonic_screwdriver/exceptions.py:97
 msgid "Unprocessable Entity."
-msgstr ""
+msgstr "Diese Anfrage ist nicht bearbeitbar."
 
 #: django_sonic_screwdriver/exceptions.py:104
 msgid ""
@@ -99,6 +149,8 @@ msgid ""
 "Something's gone wrong. Our technicians are working flat out to solve the "
 "problem."
 msgstr ""
+"Da ist leider was schief gelaufen. Unsere Techniker sind bereits "
+"informiert und arbeiten mit Hochdruck an einer Lösung."
 
 #: django_sonic_screwdriver/models.py:22
 msgid "Created at"

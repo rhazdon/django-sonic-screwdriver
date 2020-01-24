@@ -1,6 +1,6 @@
 from subprocess import call, check_output
 
-from django_sonic_screwdriver.settings import APISettings
+from django_sonic_screwdriver.settings import api_settings
 from django_sonic_screwdriver.version import version
 from django_sonic_screwdriver.utils import shell
 from django_sonic_screwdriver.git.decorators import git_available
@@ -48,12 +48,13 @@ class Git:
     @git_available
     def check_existence_of_staging_tag_in_remote_repo():
         """
-        This method will check, if the given tag exists as a staging tag in the remote repository.
+        This method will check, if the given tag exists as a staging
+        tag in the remote repository.
 
-        The intention is, that every tag, which should be deployed on a production environment,
-        has to be deployed on a staging environment before.
+        The intention is, that every tag, which should be deployed
+        on a production environment, has to be deployed on a staging environment before.
         """
-        staging_tag = Git.create_git_version_tag(APISettings.GIT_STAGING_PRE_TAG)
+        staging_tag = Git.create_git_version_tag(api_settings.GIT_STAGING_PRE_TAG)
 
         command_git = "git ls-remote -t"
         command_awk = "awk '{print $2}'"
@@ -98,58 +99,6 @@ class Git:
     # Git Basic Methods
     @staticmethod
     @git_available
-    def __git_add(args=""):
-        """
-        Add files to staging.
-        The function call will return 0 if the command success.
-        """
-        command = ["git", "add", "."]
-        shell.msg("Adding files...")
-
-        if APISettings.DEBUG:
-            Git.__debug(command, True)
-
-        for key in args:
-            command.append(key)
-        if not call(command):
-            pass
-        return False
-
-    # @staticmethod
-    # @git_available
-    # def __git_branch_create(git_tag):
-    #     """
-    #     Creates a new branch.
-    #     The function call will return 0 if the command success.
-    #     """
-    #     Shell.msg('Create new branch with tag ' + git_tag)
-    #     if APISettings.DEBUG:
-    #         Shell.debug('Execute "git checkout -b" would create a new branch with name ' + git_tag + '.')
-    #         return True
-    #
-    #     if not call(['git', 'checkout', '-b', '\'' + git_tag + '\'']):
-    #         return True
-    #     return False
-    @staticmethod
-    @git_available
-    def __git_commit(git_tag):
-        """
-        Commit files to branch.
-        The function call will return 0 if the command success.
-        """
-        shell.msg("Commit changes.")
-        if APISettings.DEBUG:
-            shell.debug('Execute "git commit" in dry mode.')
-            if not call(["git", "commit", "-m", "'" + git_tag + "'", "--dry-run"]):
-                pass
-            return True
-
-        if not call(["git", "commit", "-m", "'" + git_tag + "'"]):
-            return True
-        return False
-
-    @staticmethod
-    @git_available
     def __git_tag(git_tag):
         """
         Create new tag.
@@ -158,7 +107,7 @@ class Git:
         command = ["git", "tag", "-a", git_tag, "-m", "'" + git_tag + "'"]
         shell.msg("Create tag from version " + git_tag)
 
-        if APISettings.DEBUG:
+        if api_settings.DEBUG:
             Git.__debug(command, False)
 
         if not call(command):
@@ -175,7 +124,7 @@ class Git:
         command = ["git", "tag", "-s", git_tag, "-m", "'" + git_tag + "'"]
         shell.msg("Create signed tag version " + git_tag + " with GPG")
 
-        if APISettings.DEBUG:
+        if api_settings.DEBUG:
             Git.__debug(command, False)
 
         if not call(command):
@@ -192,12 +141,10 @@ class Git:
         command = ["git", "push", "origin", "--tags"]
         shell.msg("Pushing tags...")
 
-        if APISettings.DEBUG:
+        if api_settings.DEBUG:
             Git.__debug(command, True)
 
-        if not call(command):
-            return True
-        return False
+        call(command)
 
     @staticmethod
     @git_available
@@ -209,12 +156,10 @@ class Git:
         command = ["git", "tag", "-d", "'" + git_tag + "'"]
         shell.msg("Delete tag.")
 
-        if APISettings.DEBUG:
+        if api_settings.DEBUG:
             Git.__debug(command, False)
 
-        if not call(command):
-            return True
-        return False
+        call(command)
 
     @git_available
     def __git_push(self):
@@ -222,100 +167,54 @@ class Git:
         command = ["git", "push", "-u", "origin", branch]
         shell.msg("Pushing branch " + branch + " to server...")
 
-        if APISettings.DEBUG:
+        if api_settings.DEBUG:
             Git.__debug(command, True)
 
         if not call(command):
             shell.success("Push success!")
-            return True
-        return False
 
     # Public Methods
-    def add(self, args=""):
-        """
-        Function is public.
-        :return:
-        """
-        if self.__git_add(args):
-            return True
-        return False
-
-    # def branch_create(self):
-    #     """
-    #     Function is public.
-    #     :return:
-    #     """
-    #     if self.__git_commit(Version.get_version()):
-    #         return True
-    #     return False
-
-    def commit(self):
-        """
-        Function is public.
-        Commit staged files into current branch.
-        :return:
-        """
-        if self.__git_commit(self.create_git_version_tag("")):
-            return True
-        return False
-
-    def push_branches(self):
-        """
-        Function is public.
-        Push branches.
-        :return:
-        """
-        if self.__git_push():
-            return True
-        return False
-
     def tag(self, deploy_tag=""):
         """
         Function is public.
         Create a tag for current commit / branch.
+
         :param deploy_tag:
         :return:
         """
         if (
-            APISettings.SECURE_TAGGING
-            and deploy_tag == APISettings.GIT_ACTIVATE_PRE_TAG
+            api_settings.SECURE_TAGGING
+            and deploy_tag == api_settings.GIT_ACTIVATE_PRE_TAG
         ):
             if self.check_existence_of_staging_tag_in_remote_repo():
                 pass
             else:
                 shell.fail(
-                    "SECURE TAGGING is TRUE! That means, before you are able to create a production tag, "
-                    "you need to deploy the software on a staging environment."
+                    "SECURE TAGGING is TRUE! That means, before you are able to "
+                    "create a production tag, you need to deploy the software on "
+                    "a staging environment."
                 )
-                return False
-        if self.__git_tag(self.create_git_version_tag(deploy_tag)):
-            return True
-        return False
+        self.__git_tag(self.create_git_version_tag(deploy_tag))
 
     def push_tags(self):
         """
         Function is public.
         Push tags.
+
         :return:
         """
-        if self.__git_tag_push():
-            return True
-        return False
+        self.__git_tag_push()
 
     def tag_delete(self, tag):
         """
         Function is public.
         Push tags.
+
         :return:
         """
         if tag:
-            if self.__git_tag_delete(tag):
-                return True
-            return False
-
-        if self.__git_tag_delete(self.get_latest_tag()):
-            return True
-        return False
+            self.__git_tag_delete(tag)
+        self.__git_tag_delete(self.get_latest_tag())
 
 
 git = Git()

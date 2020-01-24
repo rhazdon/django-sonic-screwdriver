@@ -9,25 +9,17 @@ DEFAULTS = {
     "VERSION_FILE": "setup.py",
     "RELEASE_SEPARATOR": "",
     "PATCH_AUTO_TAG": False,
-    "PATCH_AUTO_TAG_PUSH": False,
-    "PATCH_AUTO_COMMIT": False,
     # Git
     "GIT_DIR": settings.BASE_DIR,
     # Git Tagging
-    "GIT_TAG_AUTO_COMMIT": False,
     "GIT_TAG_AUTO_TAG_PUSH": False,
     "GIT_STAGING_PRE_TAG": "staging",
     "GIT_ACTIVATE_PRE_TAG": "activate",
     "SECURE_TAGGING": True,
+    # App Ban
+    "BAN_REMOTE_ADDR_HEADER": "REMOTE_ADDR",
+    "BAN_DEFAULT_END_TIME": 60 * 60,
 }
-
-DJANGO_SONIC_SCREWDRIVER_BAN_REMOTE_ADDR_HEADER = getattr(
-    settings, "DJANGO_SONIC_SCREWDRIVER_BAN_REMOTE_ADDR_HEADER", "REMOTE_ADDR"
-)
-
-DJANGO_SONIC_SCREWDRIVER_BAN_DEFAULT_END_TIME = getattr(
-    settings, "DJANGO_SONIC_SCREWDRIVER_BAN_DEFAULT_END_TIME", 60 * 60
-)
 
 
 class APISettings(object):
@@ -59,4 +51,4 @@ class APISettings(object):
         return val
 
 
-APISettings = APISettings(USER_SETTINGS, DEFAULTS)
+api_settings = APISettings(USER_SETTINGS, DEFAULTS)

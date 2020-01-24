@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 from django_sonic_screwdriver.git import git
-from django_sonic_screwdriver.settings import APISettings
+from django_sonic_screwdriver.settings import api_settings
 
 
 class Command(BaseCommand):
@@ -43,6 +43,8 @@ class Command(BaseCommand):
         :return:
         """
         counter = 0
+        tag_succeed = 1
+
         for key in options:
             if options[key]:
                 counter += 1
@@ -50,23 +52,16 @@ class Command(BaseCommand):
         # If no options are set, do a normal patch
         if counter == 1:
             options["default"] = True
-        ###########################################################################################
-
-        tag_succeed = 1
-
-        if APISettings.GIT_TAG_AUTO_COMMIT:
-            git.add()
-            git.commit()
 
         if options["default"]:
             tag_succeed = git.tag()
 
         if options["staging"]:
-            tag_succeed = git.tag(APISettings.GIT_STAGING_PRE_TAG)
+            tag_succeed = git.tag(api_settings.GIT_STAGING_PRE_TAG)
 
         if options["production"]:
-            tag_succeed = git.tag(APISettings.GIT_ACTIVATE_PRE_TAG)
+            tag_succeed = git.tag(api_settings.GIT_ACTIVATE_PRE_TAG)
 
-        if options["push"] | APISettings.GIT_TAG_AUTO_TAG_PUSH:
+        if options["push"] | api_settings.GIT_TAG_AUTO_TAG_PUSH:
             if tag_succeed:
                 git.push_tags()
