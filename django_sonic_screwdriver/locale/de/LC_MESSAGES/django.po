@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-24 06:22+0000\n"
+"POT-Creation-Date: 2020-01-24 11:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,8 +23,8 @@ msgid "Created and Updated"
 msgstr "Erstellt und Aktualisiert"
 
 #: django_sonic_screwdriver/apps/admin_comments/models.py:14
-#: django_sonic_screwdriver/apps/ban/models.py:39
-#: django_sonic_screwdriver/apps/ban/models.py:70
+#: django_sonic_screwdriver/apps/ban/models.py:40
+#: django_sonic_screwdriver/apps/ban/models.py:71
 msgid "User"
 msgstr "Nutzer"
 
@@ -63,49 +63,49 @@ msgstr "Kommentare"
 
 #: django_sonic_screwdriver/apps/ban/admin.py:12
 #: django_sonic_screwdriver/apps/ban/admin.py:18
-#: django_sonic_screwdriver/apps/ban/models.py:62
+#: django_sonic_screwdriver/apps/ban/models.py:63
 msgid "Ban"
 msgstr "Sperre"
 
-#: django_sonic_screwdriver/apps/ban/models.py:49
+#: django_sonic_screwdriver/apps/ban/models.py:50
 msgid "End date of the ban"
 msgstr "Sperre gültig bis"
 
-#: django_sonic_screwdriver/apps/ban/models.py:53
+#: django_sonic_screwdriver/apps/ban/models.py:54
 msgid ""
 "The end date tells, until the ban is valid. If the end_date is empty, the "
 "ban is infinit."
 msgstr ""
-"Das End-Datum sagt aus, bis wann die Sperre gültig ist. "
-"Das Feld kann auch leer gelassen werden, um die Sperre fristlos zu setzen."
+"Das End-Datum sagt aus, bis wann die Sperre gültig ist. Das Feld kann auch "
+"leer gelassen werden, um die Sperre fristlos zu setzen."
 
-#: django_sonic_screwdriver/apps/ban/models.py:63
+#: django_sonic_screwdriver/apps/ban/models.py:64
 msgid "Bans"
 msgstr "Sperren"
 
-#: django_sonic_screwdriver/apps/ban/models.py:78
+#: django_sonic_screwdriver/apps/ban/models.py:79
 msgid "User Ban"
 msgstr "Nutzer Sperre"
 
-#: django_sonic_screwdriver/apps/ban/models.py:79
+#: django_sonic_screwdriver/apps/ban/models.py:80
 msgid "User Bans"
 msgstr "Nutzer Sperren"
 
-#: django_sonic_screwdriver/apps/ban/models.py:87
+#: django_sonic_screwdriver/apps/ban/models.py:88
 msgid "IP"
 msgstr "IP"
 
-#: django_sonic_screwdriver/apps/ban/models.py:91
+#: django_sonic_screwdriver/apps/ban/models.py:92
 msgid "This is the banned ip. Every request from this IP will result in 403."
 msgstr ""
-"Dies ist die IP, die gesperrt wird. Jede Anfrage, "
-"die von dieser IP kommt, wird mit 403 beantwortet."
+"Dies ist die IP, die gesperrt wird. Jede Anfrage, die von dieser IP kommt, "
+"wird mit 403 beantwortet."
 
-#: django_sonic_screwdriver/apps/ban/models.py:96
+#: django_sonic_screwdriver/apps/ban/models.py:97
 msgid "IP Ban"
 msgstr "IP Sperre"
 
-#: django_sonic_screwdriver/apps/ban/models.py:97
+#: django_sonic_screwdriver/apps/ban/models.py:98
 msgid "IP Bans"
 msgstr "IP Sperren"
 
@@ -149,8 +149,8 @@ msgid ""
 "Something's gone wrong. Our technicians are working flat out to solve the "
 "problem."
 msgstr ""
-"Da ist leider was schief gelaufen. Unsere Techniker sind bereits "
-"informiert und arbeiten mit Hochdruck an einer Lösung."
+"Da ist leider was schief gelaufen. Unsere Techniker sind bereits informiert "
+"und arbeiten mit Hochdruck an einer Lösung."
 
 #: django_sonic_screwdriver/models.py:22
 msgid "Created at"
