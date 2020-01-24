@@ -1,9 +1,9 @@
-from django.conf import settings
-from django.contrib.auth import get_user
+from django.contrib.auth.models import AnonymousUser
 from django.db.models import Q
+from django.http import HttpResponseForbidden
 from django.utils import timezone
 
-from django_sonic_screwdriver.exceptions import ForbiddenException
+from django_sonic_screwdriver.settings import api_settings
 
 from .models import UserBan, IPBan
 
@@ -14,9 +14,15 @@ class BanMiddleware:
 
     def __call__(self, request):
         request = self._before_view(request)
+        if isinstance(request, HttpResponseForbidden):
+            return request
+
         response = self.get_response(request)
         request, response = self._after_view(request, response)
         return response
+
+    def bans_found_action(self):
+        return HttpResponseForbidden()
 
     def _before_view(self, request):
         """
@@ -26,8 +32,8 @@ class BanMiddleware:
         :param request:
         :return:
         """
-        self.__check_for_user_bans(request)
-        self.__check_for_ip_bans(request)
+        if self.__user_ban_exists(request) or self.__ip_ban_exists(request):
+            return self.bans_found_action()
         return request
 
     def _after_view(self, request, response):
@@ -41,33 +47,29 @@ class BanMiddleware:
         """
         return request, response
 
-    def __check_for_user_bans(self, request):
+    def __user_ban_exists(self, request):
         """
         Get the user and try to find a ban for the user.
 
         :param: request
         """
-        user = get_user(request)
-        bans = UserBan.objects.filter(banned_user=user).filter(
-            Q(end_date__gte=timezone.now()) | Q(end_date__exact=None)
-        )
+        if not isinstance(request.user, AnonymousUser):
+            return (
+                UserBan.objects.filter(banned_user=request.user)
+                .filter(Q(end_date__gte=timezone.now()) | Q(end_date__exact=None))
+                .exists()
+            )
 
-        if bans:
-            raise ForbiddenException()
-
-    def __check_for_ip_bans(self, request):
+    def __ip_ban_exists(self, request):
         """
         Get the ip_address of the request and try to find a ban
         with this ip.
 
         :param: request
         """
-        ip_address = request.META.get(
-            settings.DJANGO_SONIC_SCREWDRIVER_BAN_REMOTE_ADDR_HEADER
+        ip_address = request.META.get(api_settings.BAN_REMOTE_ADDR_HEADER)
+        return (
+            IPBan.objects.filter(ip=ip_address)
+            .filter(Q(end_date__gte=timezone.now()) | Q(end_date__exact=None))
+            .exists()
         )
-        bans = IPBan.objects.filter(ip=ip_address).filter(
-            Q(end_date__gte=timezone.now()) | Q(end_date__exact=None)
-        )
-
-        if bans:
-            raise ForbiddenException()

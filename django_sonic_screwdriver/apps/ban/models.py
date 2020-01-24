@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 
 from django_sonic_screwdriver.models import BaseModel, BaseManager
+from django_sonic_screwdriver.settings import api_settings
 
 
 class BanManager(BaseManager):
@@ -28,7 +29,7 @@ class BanManager(BaseManager):
     @staticmethod
     def __get_default_end_date():
         return timezone.now() + timezone.timedelta(
-            seconds=settings.DJANGO_SONIC_SCREWDRIVER_BAN_DEFAULT_END_TIME
+            seconds=api_settings.BAN_DEFAULT_END_TIME
         )
 
 
